@@ -753,7 +753,8 @@
       color: #1bc7fb
     }
 
-    .glitch div {
+    .glitch div,
+    .glitch img {
       animation: paths 5s step-end infinite
     }
 
@@ -865,9 +866,15 @@
   <canvas id="background-canvas"></canvas>
 
   <div class="container">
-    <header>
+    <header style="padding-top: 5rem;">
       <div class="logo-container">
-        <div class="hero glitch layers">
+        <div style="border: 2px solid var(--accent-green); border-radius: 5px; margin-right: 1.6rem;">
+          <div class="hero glitch layers" style="margin: 0; padding: 0; display: flex;">
+            <img src="/assets/thumbnail.webp" alt="" srcset="/assets/thumbnail.webp" style="padding: 7px; margin: 0;" />
+          </div>
+        </div>
+
+        <div class="hero glitch layers" style="margin: 0; padding: 0; display: flex;">
           <div class="logo-text">MilanDroid</div>
         </div>
       </div>
@@ -876,7 +883,7 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
-<!--          <li><a href="#projects">Projects</a></li>-->
+          <!--          <li><a href="#projects">Projects</a></li>-->
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -889,19 +896,29 @@
         <h2 class="hero-subtitle">Full-Stack Developer</h2>
 
         <div class="hero-description">
-          <p>I'm a full-stack developer with more than 8 years of experience in the field. I've worked with Vue,
-            Laravel, MySQL, Postgres, Google Cloud, Vanilla JS, and more.</p>
-          <p>I'm a good problem solver. I've made significant improvements in companies I've worked for, reducing
+          <p>
+            I'm a full-stack developer with more than 8 years of experience in the field. I've worked with Vue,
+            Laravel, MySQL, Postgres, Google Cloud, Vanilla JS, and more.
+          </p>
+          <p>
+            I'm a good problem solver. I've made significant improvements in companies I've worked for, reducing
             processes from days to seconds, creating automation tools, and developing software that generates
-            substantial revenue.</p>
+            substantial revenue.
+          </p>
         </div>
 
         <a href="#contact" class="cta-button">Get In Touch</a>
 
         <div class="social-links">
-          <a href="https://www.upwork.com/freelancers/~01ba3fa0d17239ee41" target="_blank" class="social-link"><img src="/assets/upwork-logo-61a17516.svg" alt="Upwork" style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(150deg);"/></a>
-          <a href="https://www.linkedin.com/in/antony-brenes/" target="_blank" class="social-link"><img src="/assets/linkedin-logo-ac51ac9f.svg" alt="LinkedIn" style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(150deg);"/></a>
-          <a href="mailto:contact@milandroid.dev" target="_blank" class="social-link"><img src="/assets/gmail-logo-fa38ed00.svg" alt="Gmail" style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(300deg);"/></a>
+          <a href="https://www.upwork.com/freelancers/~01ba3fa0d17239ee41" target="_blank" class="social-link"><img
+              src="/assets/upwork-logo-61a17516.svg" alt="Upwork"
+              style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(150deg);" /></a>
+          <a href="https://www.linkedin.com/in/antony-brenes/" target="_blank" class="social-link"><img
+              src="/assets/linkedin-logo-ac51ac9f.svg" alt="LinkedIn"
+              style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(150deg);" /></a>
+          <a href="mailto:antonybrenescruz@gmail.com" target="_blank" class="social-link"><img
+              src="/assets/gmail-logo-fa38ed00.svg" alt="Gmail"
+              style="filter: invert(1) sepia(0.08) saturate(5000%) hue-rotate(300deg);" /></a>
         </div>
       </div>
 
@@ -1043,98 +1060,98 @@
       </div>
     </section>
 
-<!--    <section id="projects" class="projects-section">-->
-<!--      <div class="section-header">-->
-<!--        <h2 class="section-title">Recent Projects</h2>-->
-<!--      </div>-->
+    <!--    <section id="projects" class="projects-section">-->
+    <!--      <div class="section-header">-->
+    <!--        <h2 class="section-title">Recent Projects</h2>-->
+    <!--      </div>-->
 
-<!--      <div class="projects-grid">-->
-<!--        <div class="project-card glass-card">-->
-<!--          <div class="project-image"></div>-->
-<!--          <div class="project-overlay">-->
-<!--            <h3 class="project-title">Project Alpha</h3>-->
-<!--            <div class="project-tags">-->
-<!--              <span class="project-tag">Vue.js</span>-->
-<!--              <span class="project-tag">Laravel</span>-->
-<!--              <span class="project-tag">MySQL</span>-->
-<!--            </div>-->
-<!--            <p>A comprehensive management system that optimized workflow by 60%.</p>-->
-<!--            <div class="project-links">-->
-<!--              <a href="#" class="project-link">View Demo</a>-->
-<!--              <a href="#" class="project-link">Source Code</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+    <!--      <div class="projects-grid">-->
+    <!--        <div class="project-card glass-card">-->
+    <!--          <div class="project-image"></div>-->
+    <!--          <div class="project-overlay">-->
+    <!--            <h3 class="project-title">Project Alpha</h3>-->
+    <!--            <div class="project-tags">-->
+    <!--              <span class="project-tag">Vue.js</span>-->
+    <!--              <span class="project-tag">Laravel</span>-->
+    <!--              <span class="project-tag">MySQL</span>-->
+    <!--            </div>-->
+    <!--            <p>A comprehensive management system that optimized workflow by 60%.</p>-->
+    <!--            <div class="project-links">-->
+    <!--              <a href="#" class="project-link">View Demo</a>-->
+    <!--              <a href="#" class="project-link">Source Code</a>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-<!--        <div class="project-card glass-card">-->
-<!--          <div class="project-image"></div>-->
-<!--          <div class="project-overlay">-->
-<!--            <h3 class="project-title">Project Beta</h3>-->
-<!--            <div class="project-tags">-->
-<!--              <span class="project-tag">JavaScript</span>-->
-<!--              <span class="project-tag">Google Cloud</span>-->
-<!--              <span class="project-tag">NoSQL</span>-->
-<!--            </div>-->
-<!--            <p>Real-time data analytics platform with dynamic visualization.</p>-->
-<!--            <div class="project-links">-->
-<!--              <a href="#" class="project-link">View Demo</a>-->
-<!--              <a href="#" class="project-link">Source Code</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+    <!--        <div class="project-card glass-card">-->
+    <!--          <div class="project-image"></div>-->
+    <!--          <div class="project-overlay">-->
+    <!--            <h3 class="project-title">Project Beta</h3>-->
+    <!--            <div class="project-tags">-->
+    <!--              <span class="project-tag">JavaScript</span>-->
+    <!--              <span class="project-tag">Google Cloud</span>-->
+    <!--              <span class="project-tag">NoSQL</span>-->
+    <!--            </div>-->
+    <!--            <p>Real-time data analytics platform with dynamic visualization.</p>-->
+    <!--            <div class="project-links">-->
+    <!--              <a href="#" class="project-link">View Demo</a>-->
+    <!--              <a href="#" class="project-link">Source Code</a>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-<!--        <div class="project-card glass-card">-->
-<!--          <div class="project-image"></div>-->
-<!--          <div class="project-overlay">-->
-<!--            <h3 class="project-title">Project Gamma</h3>-->
-<!--            <div class="project-tags">-->
-<!--              <span class="project-tag">PHP</span>-->
-<!--              <span class="project-tag">PostgreSQL</span>-->
-<!--              <span class="project-tag">REST API</span>-->
-<!--            </div>-->
-<!--            <p>Scalable e-commerce solution with integrated payment processing.</p>-->
-<!--            <div class="project-links">-->
-<!--              <a href="#" class="project-link">View Demo</a>-->
-<!--              <a href="#" class="project-link">Source Code</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </section>-->
+    <!--        <div class="project-card glass-card">-->
+    <!--          <div class="project-image"></div>-->
+    <!--          <div class="project-overlay">-->
+    <!--            <h3 class="project-title">Project Gamma</h3>-->
+    <!--            <div class="project-tags">-->
+    <!--              <span class="project-tag">PHP</span>-->
+    <!--              <span class="project-tag">PostgreSQL</span>-->
+    <!--              <span class="project-tag">REST API</span>-->
+    <!--            </div>-->
+    <!--            <p>Scalable e-commerce solution with integrated payment processing.</p>-->
+    <!--            <div class="project-links">-->
+    <!--              <a href="#" class="project-link">View Demo</a>-->
+    <!--              <a href="#" class="project-link">Source Code</a>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
 
-<!--    <section id="contact" class="contact-section">-->
-<!--      <div class="section-header">-->
-<!--        <h2 class="section-title">Get In Touch</h2>-->
-<!--      </div>-->
+    <!--    <section id="contact" class="contact-section">-->
+    <!--      <div class="section-header">-->
+    <!--        <h2 class="section-title">Get In Touch</h2>-->
+    <!--      </div>-->
 
-<!--      <div class="glass-card">-->
-<!--        <form class="contact-form">-->
-<!--          <div class="form-group">-->
-<!--            <input type="text" class="form-control" placeholder="Your Name" required>-->
-<!--          </div>-->
+    <!--      <div class="glass-card">-->
+    <!--        <form class="contact-form">-->
+    <!--          <div class="form-group">-->
+    <!--            <input type="text" class="form-control" placeholder="Your Name" required>-->
+    <!--          </div>-->
 
-<!--          <div class="form-group">-->
-<!--            <input type="email" class="form-control" placeholder="Your Email" required>-->
-<!--          </div>-->
+    <!--          <div class="form-group">-->
+    <!--            <input type="email" class="form-control" placeholder="Your Email" required>-->
+    <!--          </div>-->
 
-<!--          <div class="form-group full-width">-->
-<!--            <input type="text" class="form-control" placeholder="Subject" required>-->
-<!--          </div>-->
+    <!--          <div class="form-group full-width">-->
+    <!--            <input type="text" class="form-control" placeholder="Subject" required>-->
+    <!--          </div>-->
 
-<!--          <div class="form-group full-width">-->
-<!--            <textarea class="form-control" placeholder="Your Message" required></textarea>-->
-<!--          </div>-->
+    <!--          <div class="form-group full-width">-->
+    <!--            <textarea class="form-control" placeholder="Your Message" required></textarea>-->
+    <!--          </div>-->
 
-<!--          <div class="form-group full-width">-->
-<!--            <button type="submit" class="submit-btn">Send Message</button>-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </section>-->
+    <!--          <div class="form-group full-width">-->
+    <!--            <button type="submit" class="submit-btn">Send Message</button>-->
+    <!--          </div>-->
+    <!--        </form>-->
+    <!--      </div>-->
+    <!--    </section>-->
 
-<!--    <footer>-->
-<!--      <p class="footer-text">© 2025 MilanDroid | Antony Brenes. All rights reserved.</p>-->
-<!--    </footer>-->
+    <!--    <footer>-->
+    <!--      <p class="footer-text">© 2025 MilanDroid | Antony Brenes. All rights reserved.</p>-->
+    <!--    </footer>-->
   </div>
 
   <script type="module">
