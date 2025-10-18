@@ -667,6 +667,10 @@
             line-height: 1.5;
         }
 
+        .terminal-text-variable {
+            color: var(--accent-green);
+        }
+
         .terminal-text::before {
             content: '$';
             color: var(--accent-green);
@@ -911,14 +915,14 @@
             <div class="hero-description">
                 <div class="about-text">
                     <p class="terminal-text">
-                        Currently, exploring ways to integrate AI into projects, leveraging different models and tools
-                        to automate processes and enhance efficiency.
+                        <span class="terminal-text-variable">ABOUT=</span>"JS, PHP, Vue and Laravel expert. Currently, exploring ways to integrate AI into projects, leveraging different models and tools
+                        to automate processes and enhance efficiency."
                     </p>
                     <p class="terminal-text">
-                        I've made significant improvements in companies I've worked for, reducing
+                        <span class="terminal-text-variable">ACHIEVEMENTS=</span>"I've made significant improvements in companies I've worked for, reducing
                         processes from days to seconds, creating apps with <b>+500K users</b>, automation tools, and
                         developing software that generates
-                        significant revenue.
+                        significant revenue."
                         <span class="blinking-cursor"></span>
                     </p>
                 </div>
