@@ -315,6 +315,24 @@
             background: var(--accent-green);
         }
 
+        .github-stats-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .github-stats-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border-radius: 8px;
+            padding: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
         .hexagon-grid {
             display: flex;
             flex-wrap: wrap;
@@ -353,8 +371,14 @@
         }
 
         .tech-icon {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 6px;
+        }
+
+        .tech-icon-sm {
+            width: 28px;
+            height: 28px;
             margin-bottom: 6px;
         }
 
@@ -734,11 +758,6 @@
                 margin: 15px 5px;
             }
 
-            .tech-icon {
-                width: 40px;
-                height: 40px;
-            }
-
             .tech-name {
                 font-size: 0.7rem;
             }
@@ -953,6 +972,12 @@
     <section id="skills" class="tech-stack-section" style="min-height: 100dvh">
         <h2 class="tech-stack-title">SKILLS</h2>
 
+        <div class="github-stats-container">
+            <a href="http://github.com/MilanDroid" target="_blank" class="github-stats-link">
+                <img src="https://github-readme-stats.vercel.app/api?username=MilanDroid&show_icons=true&theme=tokyonight&count_private=true&include_all_commits=true&hide_border=true&bg_color=1a2033b3" alt="GitHub Stats">
+            </a>
+        </div>
+
         <div class="hexagon-grid">
             <div class="hexagon-item">
                 <div class="hexagon">
@@ -1005,15 +1030,11 @@
 
             <div class="hexagon-item">
                 <div class="hexagon">
-                    <img src="/assets/css-logo-42f5dce2.svg" alt="CSS3" class="tech-icon"/>
-                    <div class="tech-name">CSS3</div>
-                </div>
-            </div>
-
-            <div class="hexagon-item">
-                <div class="hexagon">
-                    <img src="/assets/html-logo-9c1b8876.svg" alt="HTML5" class="tech-icon"/>
-                    <div class="tech-name">HTML5</div>
+                    <div>
+                        <img src="/assets/html-logo-9c1b8876.svg" alt="HTML5" class="tech-icon-sm"/>
+                        <img src="/assets/css-logo-42f5dce2.svg" alt="CSS3" class="tech-icon-sm"/>
+                    </div>
+                    <div class="tech-name">HTML/CSS</div>
                 </div>
             </div>
         </div>
