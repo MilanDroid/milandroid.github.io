@@ -303,7 +303,7 @@
 
         /* Tech Stack Section - New Hexagonal Grid */
         .tech-stack-section {
-            padding: 4rem 0;
+            padding: 1rem 0;
             position: relative;
         }
 
@@ -323,26 +323,6 @@
             width: 60px;
             height: 3px;
             background: var(--accent-green);
-        }
-
-        .github-stats-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .github-stats-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--glass-bg);
-            border-radius: 8px;
-            padding: 0.5rem;
-            text-decoration: none;
-            color: var(--text-color);
         }
 
         .hexagon-grid {
@@ -514,7 +494,7 @@
 
         /* Projects Section */
         .projects-section {
-            padding: 6rem 0;
+            padding: 1rem 0;
             min-height: 100vh;
         }
 
@@ -525,7 +505,8 @@
         }
 
         .project-card {
-            height: 300px;
+            height: 320px;
+            padding: 0;
             position: relative;
             overflow: hidden;
             border-radius: 8px;
@@ -540,7 +521,11 @@
         .project-image {
             width: 100%;
             height: 100%;
-            background: var(--navy-bg);
+            padding-bottom: 130px;
+            box-sizing: border-box;
+            background-color: var(--navy-bg);
+            background-origin: content-box;
+            background-position: center;
             position: relative;
         }
 
@@ -556,7 +541,7 @@
             width: 100%;
             padding: 1.5rem;
             background: linear-gradient(to top, rgba(10, 14, 23, 0.9), transparent);
-            transform: translateY(100px);
+            transform: translateY(calc(100% - 130px));
             transition: all 0.3s ease;
         }
 
@@ -987,12 +972,6 @@
     <section id="skills" class="tech-stack-section" style="min-height: 100dvh">
         <h2 class="tech-stack-title">SKILLS</h2>
 
-        <div class="github-stats-container">
-            <a href="https://github.com/MilanDroid" target="_blank" class="github-stats-link">
-                <img src="https://github-readme-stats.vercel.app/api?username=MilanDroid&show_icons=true&count_private=true&include_all_commits=true&hide_border=true&bg_color=1a2033b3&text_color=5ceba5&title_color=5ceba5&rank_icon=github&hide_rank=true" alt="GitHub Stats">
-            </a>
-        </div>
-
         <div class="hexagon-grid">
             <div class="hexagon-item">
                 <div class="hexagon">
@@ -1164,24 +1143,48 @@
 
         <div class="projects-grid">
             <div class="project-card glass-card">
-                <div class="project-image" style="background-image: url('assets/flitycs.webp'); background-size: contain; background-repeat: no-repeat"></div>
+                <div class="project-image" style="background-image: url('assets/manyue.webp'); background-size: contain; background-repeat: no-repeat"></div>
                 <div class="project-overlay">
                     <h3 class="project-title">
-                        Flitycs
+                        Manyue
                     </h3>
                     <div class="project-tags">
-                        <span class="project-tag">Express</span>
-                        <span class="project-tag">Javascript</span>
-                        <span class="project-tag">HTML</span>
-                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">Vue</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Fastify</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">AI/OCR</span>
                     </div>
 
                     <p>
-                        Smart analytics for your multi-flight journeys.
+                        Photograph a receipt or say one sentence, and it writes the entry for you.
                     </p>
 
                     <div class="project-links">
-                        <a href="https://flitycs.com" class="project-link">View Demo</a>
+                        <a href="https://manyue.dev" class="project-link">View Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card glass-card">
+                <div class="project-image" style="background-image: url('assets/burnedfile.webp'); background-size: contain; background-repeat: no-repeat"></div>
+                <div class="project-overlay">
+                    <h3 class="project-title">
+                        Burnedfile
+                    </h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Vue</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Fastify</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">Google Drive API</span>
+                    </div>
+
+                    <p>
+                        Self-destructing file sharing over the sender's own Google Drive.
+                    </p>
+
+                    <div class="project-links">
+                        <a href="https://burnedfile.com" class="project-link">View Demo</a>
                     </div>
                 </div>
             </div>
@@ -1205,6 +1208,29 @@
 
                     <div class="project-links">
                         <a href="https://www.npmjs.com/package/uigrid-view" class="project-link">View Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card glass-card">
+                <div class="project-image" style="background-image: url('assets/EleccionesHonduras2025.webp'); background-size: contain; background-repeat: no-repeat"></div>
+                <div class="project-overlay">
+                    <h3 class="project-title">
+                        Elecciones HN 2025
+                    </h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Ollama</span>
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Express</span>
+                        <span class="project-tag">Javascript</span>
+                    </div>
+
+                    <p>
+                        AI vote count for the 2025 Honduras election, read from the official actas.
+                    </p>
+
+                    <div class="project-links">
+                        <a href="https://milandroid.dev/eleccioneshn2025" class="project-link">View Demo</a>
                     </div>
                 </div>
             </div>
