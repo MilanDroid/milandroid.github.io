@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnedfile | MilanDroid</title>
+    <meta name="description" content="Self-destructing file sharing over the sender's own Google Drive.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://burnedfile.com" class="btn btn-primary" target="_blank" rel="noopener">Live site &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">Full-stack &middot; 2026</p>
+        <h1>Burnedfile</h1>
+        <p class="lede">
+            Self-destructing file sharing over the sender's <strong>own</strong> Google Drive.
+            The file lands in their Drive and stays private there. Burnedfile mints a restricted
+            link; when the link expires or its views run out, the file is hard-deleted from the
+            sender's Drive.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Vue 3</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Fastify</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Google Drive API</span>
+            <span class="tag">Argon2</span>
+            <span class="tag">Docker</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>What it honestly does</h2>
+        <p class="section-sub">
+            The product copy says this out loud, and so does this page.
+        </p>
+        <div class="prose">
+            <p>
+                Burnedfile controls <strong>distribution of the link</strong>, not the content. Once
+                bytes reach a viewer, no restriction applies &mdash; screenshots, Save-As and
+                re-uploads are unstoppable. What it actually promises is revocation of
+                <em>future</em> access, plus an audit trail.
+            </p>
+            <p>
+                Country and IP restrictions are <strong>deterrent controls, not security
+                boundaries</strong>. They stop casual and accidental access. They do not stop a VPN.
+            </p>
+            <p>
+                Files are removed within minutes of the final view or expiry, and always within 90
+                minutes. Not "instantly" &mdash; the architecture cannot keep that claim, so it
+                does not make it.
+            </p>
+        </div>
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>Why this section exists.</strong> Most tools in this category overpromise.
+            Writing the limits down first made the engineering decisions easier: every control below
+            is built to be honest about what it can and cannot enforce.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How a view is decided</h2>
+        <p class="section-sub">
+            Every request for a shared file runs an ordered rule pipeline. The order is deliberate:
+            a link that is dead is never denied for <em>who the viewer is</em>, which keeps deny
+            reasons honest in the audit log.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 340" role="img" aria-labelledby="pipeline-title">
+                <title id="pipeline-title">Ordered policy pipeline from request to allow or deny</title>
+
+                <rect x="10" y="140" width="96" height="52" rx="6" class="d-box-accent"/>
+                <text x="58" y="163" class="d-label-accent" text-anchor="middle">viewer</text>
+                <text x="58" y="179" class="d-label-sm" text-anchor="middle">GET /l/:id</text>
+
+                <path d="M110 166 H150" class="d-line" marker-end="url(#bf-arrow)"/>
+
+                <rect x="152" y="40" width="600" height="256" rx="8" class="d-box-muted"/>
+                <text x="452" y="64" class="d-label-sm" text-anchor="middle">policy/ &mdash; pure decision core: no I/O, no clock, no network</text>
+
+                <rect x="172" y="82" width="122" height="42" rx="5" class="d-box"/>
+                <text x="233" y="108" class="d-label" text-anchor="middle">policy_schema</text>
+
+                <rect x="310" y="82" width="122" height="42" rx="5" class="d-box"/>
+                <text x="371" y="108" class="d-label" text-anchor="middle">kill_switch</text>
+
+                <rect x="448" y="82" width="122" height="42" rx="5" class="d-box"/>
+                <text x="509" y="108" class="d-label" text-anchor="middle">link_state</text>
+
+                <rect x="586" y="82" width="122" height="42" rx="5" class="d-box"/>
+                <text x="647" y="108" class="d-label" text-anchor="middle">time_window</text>
+
+                <rect x="172" y="146" width="122" height="42" rx="5" class="d-box"/>
+                <text x="233" y="172" class="d-label" text-anchor="middle">counters</text>
+
+                <rect x="310" y="146" width="122" height="42" rx="5" class="d-box"/>
+                <text x="371" y="172" class="d-label" text-anchor="middle">byte_cap</text>
+
+                <rect x="448" y="146" width="122" height="42" rx="5" class="d-box"/>
+                <text x="509" y="172" class="d-label" text-anchor="middle">content</text>
+
+                <rect x="586" y="146" width="122" height="42" rx="5" class="d-box"/>
+                <text x="647" y="172" class="d-label" text-anchor="middle">owner_conn</text>
+
+                <rect x="172" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
+                <text x="233" y="236" class="d-label" text-anchor="middle">network_trust</text>
+
+                <rect x="310" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
+                <text x="371" y="236" class="d-label" text-anchor="middle">ip / country</text>
+
+                <rect x="448" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
+                <text x="509" y="236" class="d-label" text-anchor="middle">os</text>
+
+                <rect x="586" y="210" width="122" height="42" rx="5" class="d-box"/>
+                <text x="647" y="236" class="d-label" text-anchor="middle">password</text>
+
+                <text x="452" y="278" class="d-label-sm" text-anchor="middle">amber = deterrent control, not a security boundary</text>
+
+                <path d="M756 130 H820" class="d-line" marker-end="url(#bf-arrow)"/>
+                <rect x="794" y="86" width="96" height="46" rx="6" class="d-box-accent"/>
+                <text x="842" y="115" class="d-label-accent" text-anchor="middle">ALLOW</text>
+
+                <path d="M756 210 H820" class="d-line-danger" marker-end="url(#bf-arrow-d)"/>
+                <rect x="794" y="188" width="96" height="46" rx="6" class="d-box-danger"/>
+                <text x="842" y="209" class="d-label" text-anchor="middle">DENY</text>
+                <text x="842" y="224" class="d-label-sm" text-anchor="middle">+ reason</text>
+
+                <defs>
+                    <marker id="bf-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                    <marker id="bf-arrow-d" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="#ff6b6b"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        <p class="diagram-caption">
+            <code>api/src/policy/</code> has no dependencies on purpose. Time, geography, password
+            verification and every counter are passed <em>in</em>, which makes the whole restriction
+            surface testable as a table of plain values.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>The two state machines</h2>
+        <p class="section-sub">
+            A link's lifecycle and the stored file's lifecycle are tracked separately, because a
+            link can die long before the bytes are gone &mdash; and the gap between those two
+            moments is exactly what the sweeper closes.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 300" role="img" aria-labelledby="states-title">
+                <title id="states-title">Link state machine above, content state machine below</title>
+
+                <text x="20" y="30" class="d-label-accent">LinkState</text>
+
+                <rect x="20" y="46" width="110" height="44" rx="6" class="d-box-muted"/>
+                <text x="75" y="73" class="d-label" text-anchor="middle">DRAFT</text>
+                <path d="M134 68 H186" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="190" y="46" width="110" height="44" rx="6" class="d-box-accent"/>
+                <text x="245" y="73" class="d-label-accent" text-anchor="middle">ACTIVE</text>
+                <path d="M304 68 H356" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="360" y="46" width="110" height="44" rx="6" class="d-box"/>
+                <text x="415" y="73" class="d-label" text-anchor="middle">SEALED</text>
+                <path d="M474 68 H526" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="530" y="46" width="110" height="44" rx="6" class="d-box-danger"/>
+                <text x="585" y="73" class="d-label" text-anchor="middle">CLOSED</text>
+
+                <path d="M585 94 V116 H700" class="d-line-muted" marker-end="url(#bf-a3)"/>
+                <rect x="704" y="40" width="176" height="118" rx="6" class="d-box-muted"/>
+                <text x="792" y="60" class="d-label-sm" text-anchor="middle">ClosedReason</text>
+                <text x="716" y="78" class="d-label-sm">EXPIRED &middot; REVOKED</text>
+                <text x="716" y="94" class="d-label-sm">VIEWS_EXHAUSTED</text>
+                <text x="716" y="110" class="d-label-sm">BYTES_EXHAUSTED</text>
+                <text x="716" y="126" class="d-label-sm">CONTENT_VANISHED</text>
+                <text x="716" y="142" class="d-label-sm">ABANDONED &middot; ABUSE</text>
+
+                <text x="20" y="196" class="d-label-accent">ContentState</text>
+
+                <rect x="20" y="212" width="120" height="44" rx="6" class="d-box-muted"/>
+                <text x="80" y="239" class="d-label" text-anchor="middle">NOT_READY</text>
+                <path d="M144 234 H186" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="190" y="212" width="120" height="44" rx="6" class="d-box-accent"/>
+                <text x="250" y="239" class="d-label-accent" text-anchor="middle">SERVABLE</text>
+                <path d="M314 234 H356" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="360" y="212" width="120" height="44" rx="6" class="d-box-warn"/>
+                <text x="420" y="239" class="d-label" text-anchor="middle">BURNING</text>
+                <path d="M484 234 H526" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="530" y="212" width="120" height="44" rx="6" class="d-box-danger"/>
+                <text x="590" y="239" class="d-label" text-anchor="middle">BURNED</text>
+                <path d="M654 234 H696" class="d-line" marker-end="url(#bf-a2)"/>
+
+                <rect x="700" y="212" width="120" height="44" rx="6" class="d-box-muted"/>
+                <text x="760" y="239" class="d-label" text-anchor="middle">GONE</text>
+
+                <defs>
+                    <marker id="bf-a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                    <marker id="bf-a3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(141,151,168,0.6)"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        <p class="diagram-caption">
+            <code>BURNING &rarr; BURNED</code> is the window the 90-minute guarantee covers.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>The interface</h2>
+        <p class="section-sub">Screenshots go here.</p>
+        <div class="grid">
+            <div class="shot">
+                <div>
+                    <span class="shot-name">My links</span>
+                    The owner's dashboard: audit trail, expiry, revoke.
+                    <span class="shot-path">assets/burnedfile-links.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Link settings</span>
+                    Views, expiry, password, country and IP rules.
+                    <span class="shot-path">assets/burnedfile-settings.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Viewer's page</span>
+                    What the recipient sees, including a denied state.
+                    <span class="shot-path">assets/burnedfile-viewer.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Drive connect</span>
+                    The OAuth handoff for the sender's own Drive.
+                    <span class="shot-path">assets/burnedfile-drive.webp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Layout</h2>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>api/src/policy/</th><td>The pure decision core &mdash; no I/O, no clock, no network. The piece that must be provably correct, so it is the piece with no dependencies.</td></tr>
+                <tr><th>api/src/security/</th><td>Trust boundary, Argon2 password hashing, id generation, CIDR parsing.</td></tr>
+                <tr><th>api/src/links/</th><td>Grants, view accounting, the link state machine, the egress ledger.</td></tr>
+                <tr><th>api/src/storage/</th><td><code>StorageProvider</code> interface plus the Google Drive implementation.</td></tr>
+                <tr><th>api/src/tasks/</th><td>The sweeper and the burn.</td></tr>
+                <tr><th>api/src/web/</th><td>Fastify routes.</td></tr>
+                <tr><th>api/db/migrations/</th><td>Forward-only SQL.</td></tr>
+                <tr><th>web/</th><td>Vue 3 + Vite frontend.</td></tr>
+                <tr><th>infra/</th><td>Docker Compose, Dockerfile, nginx ALB stand-in.</td></tr>
+            </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>No build step on the API.</strong> Node 24 strips TypeScript types at runtime,
+            so what runs in production is the source you read.
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>Burnedfile &mdash; built by MilanDroid</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>

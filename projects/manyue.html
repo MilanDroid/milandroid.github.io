@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manyue | MilanDroid</title>
+    <meta name="description" content="Photograph a receipt or say one sentence, and Manyue writes the bookkeeping entry.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://manyue.dev" class="btn btn-primary" target="_blank" rel="noopener">Live site &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">Full-stack &middot; 2026</p>
+        <h1>Manyue</h1>
+        <p class="lede">
+            See where it went. Without typing it in. Photograph a receipt, or say one sentence.
+            Manyue writes the entry, files it under the right category, and remembers the shop for
+            next time.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Vue 3</span>
+            <span class="tag">Pinia</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Fastify</span>
+            <span class="tag">Drizzle</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Gemini</span>
+            <span class="tag">OCR</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The part nobody keeps doing</h2>
+        <div class="prose">
+            <p>
+                Bookkeeping tools mostly fail at the same point: the typing. A shoebox of receipts
+                turns into an evening of data entry, so the ledger goes stale and the numbers stop
+                being worth reading.
+            </p>
+            <p>
+                Manyue removes that step. A photograph or a spoken sentence becomes a draft entry
+                with a payee, a category and a split, and the ledger still balances to the cent.
+                Categories are one level deep on purpose, because two is a filing system nobody
+                keeps up.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How a receipt becomes an entry</h2>
+        <p class="section-sub">
+            The upload answers immediately and the model call happens behind the response, so a
+            slow extraction never holds the camera open.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 320" role="img" aria-labelledby="flow-title">
+                <title id="flow-title">Receipt upload, background extraction and client polling</title>
+
+                <text x="70" y="28" class="d-label-accent" text-anchor="middle">client</text>
+                <text x="330" y="28" class="d-label-accent" text-anchor="middle">Fastify API</text>
+                <text x="600" y="28" class="d-label-accent" text-anchor="middle">extractor</text>
+                <text x="815" y="28" class="d-label-accent" text-anchor="middle">MySQL</text>
+
+                <path d="M70 40 V300" class="d-line-muted"/>
+                <path d="M330 40 V300" class="d-line-muted"/>
+                <path d="M600 40 V300" class="d-line-muted"/>
+                <path d="M815 40 V300" class="d-line-muted"/>
+
+                <path d="M70 66 H326" class="d-line" marker-end="url(#my-a)"/>
+                <text x="198" y="60" class="d-label-sm" text-anchor="middle">POST /v1/receipts &nbsp;(photo)</text>
+
+                <path d="M330 100 H74" class="d-line" marker-end="url(#my-a)"/>
+                <text x="202" y="94" class="d-label-accent" text-anchor="middle">202 Accepted</text>
+                <text x="202" y="114" class="d-label-sm" text-anchor="middle">as soon as the photo is stored</text>
+
+                <path d="M330 146 H596" class="d-line" marker-end="url(#my-a)"/>
+                <text x="463" y="140" class="d-label-sm" text-anchor="middle">behind the response</text>
+
+                <rect x="520" y="160" width="160" height="40" rx="5" class="d-box-warn"/>
+                <text x="600" y="185" class="d-label" text-anchor="middle">status: extracting</text>
+
+                <path d="M600 220 H811" class="d-line" marker-end="url(#my-a)"/>
+                <text x="706" y="214" class="d-label-sm" text-anchor="middle">draft + questions</text>
+
+                <path d="M70 254 H326" class="d-line-muted" marker-end="url(#my-a2)"/>
+                <text x="198" y="248" class="d-label-sm" text-anchor="middle">GET /v1/receipts/:id &nbsp;(poll)</text>
+
+                <path d="M330 288 H74" class="d-line" marker-end="url(#my-a)"/>
+                <text x="202" y="282" class="d-label-accent" text-anchor="middle">draft, ready to confirm</text>
+
+                <defs>
+                    <marker id="my-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                    <marker id="my-a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(141,151,168,0.6)"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        <p class="diagram-caption">
+            A retry of a failed receipt is reset to <code>extracting</code> first, so nobody is
+            shown the previous failure as though it were this attempt's.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Bring your own key</h2>
+        <p class="section-sub">
+            Users can store their own Gemini API key and pay their own way.
+        </p>
+        <div class="note">
+            <strong>The rule that matters most in it:</strong> a stored key that will not open
+            <em>throws</em> rather than falling back to the server's. Falling through would bill the
+            owner for somebody who believed they were paying their own way &mdash; silently. Keys
+            are written through a write-only API and never read back.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The interface</h2>
+        <p class="section-sub">Screenshots go here.</p>
+        <div class="grid">
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Home</span>
+                    Balances per currency, cash flow by month, where it went.
+                    <span class="shot-path">assets/manyue-home.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Scan</span>
+                    Camera capture and the extracted draft with its questions.
+                    <span class="shot-path">assets/manyue-scan.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Register</span>
+                    The full ledger, split across categories, balancing to the cent.
+                    <span class="shot-path">assets/manyue-register.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">AI assistant</span>
+                    One sentence in, a recorded transaction out.
+                    <span class="shot-path">assets/manyue-assistant.webp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Built out of</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>apps/web</h3>
+                <p>Vue 3 with Pinia, vue-router and vue-i18n. IndexedDB via <code>idb</code> for local state, Zod for shared contracts.</p>
+            </div>
+            <div class="card">
+                <h3>apps/api</h3>
+                <p>Fastify with helmet, cors, rate-limit and multipart. Drizzle over MySQL, Argon2 for passwords, jose for tokens.</p>
+            </div>
+            <div class="card">
+                <h3>packages/ocr</h3>
+                <p>Receipt extraction, isolated from both the API and the web app so it can be tested on its own.</p>
+            </div>
+            <div class="card">
+                <h3>packages/shared</h3>
+                <p>Zod schemas and uuidv7 ids, imported by every other workspace so the contract has one home.</p>
+            </div>
+        </div>
+
+        <h3>A slice of the API surface</h3>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>/v1/receipts</th><td>Upload a photograph; answers 202 while extraction runs behind the response.</td></tr>
+                <tr><th>/v1/assistant/interpret</th><td>One sentence in, a structured transaction out.</td></tr>
+                <tr><th>/v1/accounts/:id/reconciliation</th><td>Statement reconciliation against the recorded ledger.</td></tr>
+                <tr><th>/v1/accounts/:id/balances</th><td>Balances per currency, which is why the home screen can add up.</td></tr>
+                <tr><th>/v1/auth/google/drive/callback</th><td>Drive connection, kept separate from sign-in.</td></tr>
+                <tr><th>/v1/categories</th><td>One level deep, by design.</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>Manyue &mdash; built by MilanDroid</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>

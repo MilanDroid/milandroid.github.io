@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIGrid | MilanDroid</title>
+    <meta name="description" content="Preview any URL across eight device sizes at once, from the command line.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://www.npmjs.com/package/uigrid-view" class="btn btn-primary" target="_blank" rel="noopener">npm package &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">CLI tool &middot; npm</p>
+        <h1>UIGrid</h1>
+        <p class="lede">
+            Preview your website on every screen size at once. One command opens a grid of eight
+            device frames pointed at the same URL, so a responsive bug shows up in the frame it
+            breaks in rather than after you have resized the window twelve times.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+            <span class="tag">Commander</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">npm</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Install and run</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">zsh</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">$</span> <span class="c-white">npm install -g uigrid-view</span>
+<span class="c-dim">added 1 package in 2s</span>
+
+<span class="c-dim"># start the grid, then type any URL into the interface</span>
+<span class="c-prompt">$</span> <span class="c-white">uigrid</span>
+
+<span class="c-dim"># or let UIGrid serve a directory for you</span>
+<span class="c-prompt">$</span> <span class="c-white">uigrid ./dist</span>
+<span class="c-cyan">UIGrid running on</span> <span class="c-green">http://localhost:3000</span>
+<span class="c-dim">opening in your default browser…</span></pre>
+            </div>
+        </div>
+        <p class="section-sub">
+            It works against anything already serving &mdash; Vite, Next.js, Create React App, a
+            staging URL &mdash; because it only ever points frames at a URL you give it.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>The eight frames</h2>
+        <p class="section-sub">
+            Drawn to relative scale. This is the actual device list the tool ships with.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 260" role="img" aria-labelledby="uigrid-title">
+                <title id="uigrid-title">The eight device viewports UIGrid renders, drawn to one shared scale</title>
+
+                <rect x="29.7" y="163.3" width="20.6" height="36.7" rx="4" class="d-box"/>
+                <text x="40" y="218" class="d-label-sm" text-anchor="middle">iPhone SE</text>
+                <text x="40" y="232" class="d-label-sm" text-anchor="middle">375&times;667</text>
+
+                <rect x="119.2" y="153.1" width="21.6" height="46.9" rx="4" class="d-box"/>
+                <text x="130" y="218" class="d-label-sm" text-anchor="middle">iPhone 14 Pro</text>
+                <text x="130" y="232" class="d-label-sm" text-anchor="middle">393&times;852</text>
+
+                <rect x="198.9" y="143.7" width="42.2" height="56.3" rx="4" class="d-box"/>
+                <text x="220" y="218" class="d-label-sm" text-anchor="middle">iPad Mini</text>
+                <text x="220" y="232" class="d-label-sm" text-anchor="middle">768&times;1024</text>
+
+                <rect x="291.8" y="124.9" width="56.3" height="75.1" rx="4" class="d-box"/>
+                <text x="320" y="218" class="d-label-sm" text-anchor="middle">iPad Pro</text>
+                <text x="320" y="232" class="d-label-sm" text-anchor="middle">1024&times;1366</text>
+
+                <rect x="396.8" y="167.0" width="56.3" height="33.0" rx="4" class="d-box-muted"/>
+                <text x="425" y="218" class="d-label-sm" text-anchor="middle">NetHub</text>
+                <text x="425" y="232" class="d-label-sm" text-anchor="middle">1024&times;600</text>
+
+                <rect x="492.4" y="160.4" width="75.1" height="39.6" rx="4" class="d-box"/>
+                <text x="530" y="218" class="d-label-sm" text-anchor="middle">Desktop</text>
+                <text x="530" y="232" class="d-label-sm" text-anchor="middle">1366&times;720</text>
+
+                <rect x="597.2" y="140.6" width="105.6" height="59.4" rx="4" class="d-box-accent"/>
+                <text x="650" y="218" class="d-label-sm" text-anchor="middle">Desktop HD</text>
+                <text x="650" y="232" class="d-label-sm" text-anchor="middle">1920&times;1080</text>
+
+                <rect x="719.6" y="120.8" width="140.8" height="79.2" rx="4" class="d-box-accent"/>
+                <text x="790" y="218" class="d-label-sm" text-anchor="middle">Desktop 4K</text>
+                <text x="790" y="232" class="d-label-sm" text-anchor="middle">2560&times;1440</text>
+
+                <path d="M16 200 H884" class="d-line-muted"/>
+                <text x="16" y="252" class="d-label-sm">one shared scale &middot; every frame points at the same URL, live</text>
+            </svg>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The interface</h2>
+        <p class="section-sub">Screenshots go here.</p>
+        <div class="grid">
+            <div class="shot">
+                <div>
+                    <span class="shot-name">The grid</span>
+                    All eight frames rendering one URL at once.
+                    <span class="shot-path">assets/uigrid-grid.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">URL bar</span>
+                    Point the whole grid somewhere new without restarting.
+                    <span class="shot-path">assets/uigrid-url.webp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How it is put together</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>bin/cli.js</h3>
+                <p>Commander parses the arguments and decides whether a static server is needed at all.</p>
+            </div>
+            <div class="card">
+                <h3>src/server.js</h3>
+                <p>Express serves the grid interface and, optionally, the local directory you pointed it at.</p>
+            </div>
+            <div class="card">
+                <h3>src/template.js</h3>
+                <p>The grid itself: one iframe per device size, each with the viewport it is named after.</p>
+            </div>
+            <div class="card">
+                <h3>open</h3>
+                <p>The browser is launched for you, because a tool you have to go and open is a tool you forget to use.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>UIGrid &mdash; built by MilanDroid &middot; v1.0.1 on npm</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>

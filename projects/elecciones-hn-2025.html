@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elecciones HN 2025 | MilanDroid</title>
+    <meta name="description" content="An independent AI-assisted count of the 2025 Honduras election, read straight from the official actas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://milandroid.dev/eleccioneshn2025" class="btn btn-primary" target="_blank" rel="noopener">Live site &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">Civic data &middot; 2025</p>
+        <h1>Elecciones HN 2025</h1>
+        <p class="lede">
+            An independent count of the 2025 Honduras presidential election, extracted from the
+            official <em>actas</em> by a local vision model and published department by department
+            &mdash; alongside the CNE's own numbers, so anyone can compare the two.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Ollama</span>
+            <span class="tag">ministral-3</span>
+            <span class="tag">React</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Express</span>
+            <span class="tag">pdf2image</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>What it claims, and what it does not</h2>
+        <div class="note">
+            <strong>This is the disclaimer the site itself carries, and it is the point.</strong>
+            The count adds up the votes exactly as they appear on the actas, and works only with the
+            information contained in those documents. Whether an acta has been altered is not
+            something this project can control &mdash; it works from public information and is not
+            affiliated with the CNE or any political party. If there were manipulation in the actas,
+            these results would reflect that same manipulation.
+        </div>
+        <div class="prose" style="margin-top:1.5rem;">
+            <p>
+                That sentence decided the architecture. A tool that cannot verify the source
+                document has exactly one honest job: transcribe faithfully, show its work, and make
+                the original reachable. So every number on the site is traceable back to the acta it
+                came from, and the acta image sits one click away.
+            </p>
+            <p>
+                The site stopped updating on 19 December 2025, and says so in a banner rather than
+                quietly going stale.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Coverage</h2>
+        <p class="section-sub">
+            The real figures from the pipeline's own report, not rounded for effect.
+        </p>
+        <div class="grid">
+            <div class="card">
+                <h3>19,137</h3>
+                <p>actas published by the CNE and pulled down.</p>
+            </div>
+            <div class="card">
+                <h3>16,895</h3>
+                <p>actas read, validated and counted.</p>
+            </div>
+            <div class="card">
+                <h3>88.28%</h3>
+                <p>coverage &mdash; and the shortfall is reported, not hidden.</p>
+            </div>
+            <div class="card">
+                <h3>2,245</h3>
+                <p>actas left unprocessed, each one listed by id in the report.</p>
+            </div>
+        </div>
+        <p class="section-sub" style="margin-top:1.5rem;">
+            Across 18 departments plus <em>voto en el exterior</em>, counting five parties: PNH,
+            PLH, LIBRE, PINU and DC.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>From a scanned acta to a number</h2>
+        <p class="section-sub">
+            Every stage writes its output to disk, so a bad reading can be found, corrected and
+            re-run without repeating the whole pipeline.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 320" role="img" aria-labelledby="hn-title">
+                <title id="hn-title">Pipeline from CNE download through OCR and validation to the published count</title>
+
+                <rect x="14" y="40" width="132" height="54" rx="6" class="d-box"/>
+                <text x="80" y="63" class="d-label" text-anchor="middle">CNE portal</text>
+                <text x="80" y="80" class="d-label-sm" text-anchor="middle">download_actas.py</text>
+
+                <path d="M150 67 H196" class="d-line" marker-end="url(#hn-a)"/>
+
+                <rect x="200" y="40" width="132" height="54" rx="6" class="d-box"/>
+                <text x="266" y="63" class="d-label" text-anchor="middle">PDF &rarr; image</text>
+                <text x="266" y="80" class="d-label-sm" text-anchor="middle">pdf2image &middot; poppler</text>
+
+                <path d="M336 67 H382" class="d-line" marker-end="url(#hn-a)"/>
+
+                <rect x="386" y="40" width="150" height="54" rx="6" class="d-box-accent"/>
+                <text x="461" y="63" class="d-label-accent" text-anchor="middle">vision model</text>
+                <text x="461" y="80" class="d-label-sm" text-anchor="middle">Ollama &middot; ministral-3</text>
+
+                <path d="M540 67 H586" class="d-line" marker-end="url(#hn-a)"/>
+
+                <rect x="590" y="40" width="132" height="54" rx="6" class="d-box"/>
+                <text x="656" y="63" class="d-label" text-anchor="middle">JSON per acta</text>
+                <text x="656" y="80" class="d-label-sm" text-anchor="middle">N and L per party</text>
+
+                <path d="M656 98 V128" class="d-line" marker-end="url(#hn-a)"/>
+
+                <rect x="560" y="132" width="192" height="58" rx="6" class="d-box-warn"/>
+                <text x="656" y="155" class="d-label" text-anchor="middle">validation</text>
+                <text x="656" y="172" class="d-label-sm" text-anchor="middle">four failure categories</text>
+
+                <path d="M556 161 H470" class="d-line-danger" marker-end="url(#hn-ad)"/>
+                <text x="513" y="152" class="d-label-sm" text-anchor="middle">fails</text>
+
+                <rect x="292" y="132" width="176" height="58" rx="6" class="d-box-danger"/>
+                <text x="380" y="155" class="d-label" text-anchor="middle">actas editor</text>
+                <text x="380" y="172" class="d-label-sm" text-anchor="middle">human corrects, side by side</text>
+
+                <path d="M380 194 V216 H572 V196" class="d-line" marker-end="url(#hn-a)"/>
+                <text x="430" y="232" class="d-label-sm" text-anchor="middle">re-checked, not trusted</text>
+
+                <path d="M752 161 H800 V232 H768" class="d-line" marker-end="url(#hn-a)"/>
+                <text x="812" y="150" class="d-label-sm" text-anchor="middle">passes</text>
+
+                <rect x="588" y="208" width="180" height="58" rx="6" class="d-box-accent"/>
+                <text x="678" y="231" class="d-label-accent" text-anchor="middle">published count</text>
+                <text x="678" y="248" class="d-label-sm" text-anchor="middle">by department &middot; vs CNE</text>
+
+                <rect x="14" y="132" width="132" height="58" rx="6" class="d-box-muted"/>
+                <text x="80" y="155" class="d-label-sm" text-anchor="middle">centros &middot; mesas</text>
+                <text x="80" y="172" class="d-label-sm" text-anchor="middle">municipios &middot; zonas</text>
+                <path d="M150 161 H288" class="d-line-muted" marker-end="url(#hn-a2)"/>
+                <text x="219" y="152" class="d-label-sm" text-anchor="middle">reference data</text>
+
+                <text x="14" y="296" class="d-label-sm">every stage writes to disk &mdash; a bad reading is found, fixed and re-run on its own</text>
+
+                <defs>
+                    <marker id="hn-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                    <marker id="hn-a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(141,151,168,0.6)"/>
+                    </marker>
+                    <marker id="hn-ad" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="#ff6b6b"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        <p class="diagram-caption">
+            A local model, deliberately. The actas are public, but running 19,137 of them through a
+            hosted API would have been slow, expensive and someone else's dependency.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>How a bad reading is caught</h2>
+        <p class="section-sub">
+            An acta has arithmetic built into it, and that arithmetic is what validates the OCR.
+            Each acta is sorted into one of five buckets.
+        </p>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>Valid</th><td>Numbers parse, and the party totals sum to the <em>gran total</em>. Counted.</td></tr>
+                <tr><th>Empty gran total</th><td>The model read no overall total, so nothing can be checked against it.</td></tr>
+                <tr><th>Gran total exceeds 400</th><td>A mesa cannot hold more than 400 votes. Anything above it is a misread digit, not a landslide.</td></tr>
+                <tr><th>Sum &ne; gran total</th><td>The parties add up to something other than the stated total &mdash; the single most useful signal that a digit was misread.</td></tr>
+                <tr><th>Other errors</th><td>Everything that fails for a reason not covered above, kept separate rather than swept into one pile.</td></tr>
+            </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>The 400 rule is the cheapest check in the project.</strong> It needs no model,
+            no second source and no judgement &mdash; just the knowledge that a Honduran mesa is
+            capped at 400 voters. It catches an entire class of OCR failure for free.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The correction tool</h2>
+        <p class="section-sub">
+            Actas that fail validation are not discarded and not guessed at. They go to a small
+            editor built for one job: put the original PDF next to the extracted JSON and let a
+            human fix the digit.
+        </p>
+        <div class="grid">
+            <div class="card">
+                <h3>Filter by status</h3>
+                <p>Work through one failure category at a time instead of hunting through 19,137 files.</p>
+            </div>
+            <div class="card">
+                <h3>PDF side by side</h3>
+                <p>The original acta rendered next to the values, via <code>react-pdf</code> and <code>pdfjs-dist</code>.</p>
+            </div>
+            <div class="card">
+                <h3>Edit N and L</h3>
+                <p>Both the numeric and written-out values an acta carries, with the total re-summed as you type.</p>
+            </div>
+            <div class="card">
+                <h3>Re-validated after</h3>
+                <p>A corrected acta goes back through the same checks. A human edit is not a free pass.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The site</h2>
+        <p class="section-sub">Screenshots go here.</p>
+        <div class="grid">
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Mi Conteo</span>
+                    The independent count, with the per-department gap for each candidate.
+                    <span class="shot-path">assets/hn2025-mi-conteo.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Conteo CNE</span>
+                    The official numbers, shown beside the independent ones.
+                    <span class="shot-path">assets/hn2025-conteo-cne.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">An&aacute;lisis a CNE</span>
+                    Where the two counts disagree, and by how much.
+                    <span class="shot-path">assets/hn2025-analisis.webp</span>
+                </div>
+            </div>
+            <div class="shot">
+                <div>
+                    <span class="shot-name">Actas</span>
+                    The index of scanned actas, each traceable to its mesa.
+                    <span class="shot-path">assets/hn2025-actas.webp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Running the pipeline</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">process_actas_ocr.py</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">$</span> <span class="c-white">python3 process_actas_ocr.py --single 16-004-04-001-16498.pdf</span>
+<span class="c-cyan">============================================================</span>
+<span class="c-cyan">ACTAS OCR PROCESSING</span>
+<span class="c-cyan">============================================================</span>
+<span class="c-white">Found 1 PDF file(s) to process</span>
+
+  <span class="c-white">&rarr; 16-004-04-001-16498.pdf</span>
+    <span class="c-dim">Converting PDF to image...</span> <span class="c-green">&check;</span>
+    <span class="c-dim">Running OCR analysis...</span> <span class="c-green">&check;</span>
+    <span class="c-dim">Saving JSON result...</span> <span class="c-green">&check;</span>
+  <span class="c-green">&check; 16-004-04-001-16498.pdf - Completed</span>
+
+<span class="c-white">Processing Summary:</span>
+  <span class="c-green">Successfully processed: 1</span>
+<span class="c-cyan">============================================================</span></pre>
+            </div>
+        </div>
+        <p class="section-sub">
+            Roughly two to three minutes per acta on local hardware. Multiply by 19,137 and the
+            reason the pipeline is resumable, chunked and writes every stage to disk becomes
+            obvious.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>What the repository holds</h2>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>utils/</th><td>The pipeline: fetching zonas, municipios, centros and mesas from the CNE; downloading actas; converting PDFs; running OCR; comparing votes; finding inconsistencies and unprocessed files.</td></tr>
+                <tr><th>app/client/</th><td>The correction tool's React + Vite interface, with <code>react-pdf</code> for the side-by-side view.</td></tr>
+                <tr><th>app/server/</th><td>A small Express server that reads and writes the acta JSON files on disk.</td></tr>
+                <tr><th>actas_data_cne/</th><td>The CNE's own published figures, kept separate from the extracted ones so the two can be compared rather than merged.</td></tr>
+                <tr><th>actas_corrections/</th><td>Human corrections, stored apart from the raw model output so the original reading is never lost.</td></tr>
+                <tr><th>reports/</th><td><code>validation_report.txt</code>, <code>unprocessed_actas_report.json</code> and the inconsistency lists that produced the coverage figures above.</td></tr>
+            </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>Corrections live in their own directory.</strong> Raw model output is never
+            overwritten, so at any point you can ask what the model actually said before a human
+            touched it &mdash; which is the only way an independent count can answer a challenge.
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>Elecciones HN 2025 &mdash; built by MilanDroid &middot; frozen 19 Dec 2025</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>

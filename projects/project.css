@@ -1,0 +1,459 @@
+/* Shared styles for the project detail pages.
+   Tokens mirror index.html so the pages read as one site. */
+
+:root {
+    --dark-bg: #0a0e17;
+    --navy-bg: #1a2033;
+    --accent-green: #5ceba5;
+    --accent-green-transparent: rgba(92, 235, 165, 0.2);
+    --accent-blue: #0d99ff;
+    --accent-purple: #8A2BE2;
+    --accent-amber: #f5b544;
+    --accent-red: #ff6b6b;
+    --text-color: #e1e7ef;
+    --text-muted: #8d97a8;
+    --glass-bg: rgba(26, 32, 51, 0.7);
+    --glass-dark-bg: rgba(26, 32, 51, 0.3);
+    --glass-border: rgba(92, 235, 165, 0.3);
+    --neon-shadow: 0 0 10px var(--accent-green), 0 0 20px rgba(92, 235, 165, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.7;
+    /* The fixed grid backdrop needs a stacking context that scrolls under content. */
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Faint grid, the quiet cousin of the three.js field on the landing page. */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(92, 235, 165, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 235, 165, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wrap {
+    position: relative;
+    z-index: 1;
+    width: min(1080px, 100% - 3rem);
+    margin-inline: auto;
+}
+
+a {
+    color: var(--accent-green);
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 14, 23, 0.82);
+    border-bottom: 1px solid rgba(92, 235, 165, 0.15);
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    flex-wrap: wrap;
+}
+
+.back-link {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--accent-green);
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.8rem;
+    font-family: inherit;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    background: var(--glass-dark-bg);
+    transition: all 0.25s ease;
+}
+
+.btn:hover {
+    background: var(--accent-green-transparent);
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+/* A link to something that does not exist yet must not look clickable. */
+.btn-pending {
+    opacity: 0.55;
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+.btn-pending:hover {
+    background: var(--glass-dark-bg);
+    border-color: var(--glass-border);
+    transform: none;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+    padding: 4rem 0 3rem;
+}
+
+.eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+}
+
+.hero .lede {
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 62ch;
+    margin-bottom: 2rem;
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+}
+
+/* ---------- sections ---------- */
+
+.section {
+    padding: 3rem 0;
+    border-top: 1px solid rgba(92, 235, 165, 0.12);
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-green);
+}
+
+.section h2::before {
+    content: '// ';
+    color: var(--text-muted);
+}
+
+.section-sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    max-width: 70ch;
+}
+
+.section h3 {
+    font-size: 1rem;
+    margin: 2rem 0 0.75rem;
+}
+
+.prose p {
+    max-width: 72ch;
+    margin-bottom: 1rem;
+}
+
+.prose p + p {
+    margin-top: 0;
+}
+
+/* ---------- cards ---------- */
+
+.grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+
+.card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(92, 235, 165, 0.18);
+    border-radius: 8px;
+    padding: 1.4rem;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+    border-color: var(--glass-border);
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    color: var(--accent-green);
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ---------- image placeholders ---------- */
+
+.shot {
+    border: 1px dashed rgba(92, 235, 165, 0.35);
+    border-radius: 8px;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(92, 235, 165, 0.03) 0 10px,
+            transparent 10px 20px
+        ),
+        var(--glass-dark-bg);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    aspect-ratio: 16 / 9;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.shot .shot-name {
+    color: var(--accent-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.shot .shot-path {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    word-break: break-all;
+}
+
+/* Portrait media (a phone, a menu-bar popover) should not be stretched wide. */
+.shot.portrait {
+    aspect-ratio: 9 / 16;
+    max-width: 300px;
+    margin-inline: auto;
+}
+
+/* ---------- diagrams ---------- */
+
+.diagram {
+    background: var(--glass-dark-bg);
+    border: 1px solid rgba(92, 235, 165, 0.18);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 560px;
+}
+
+.diagram-caption {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* SVG primitives, so each diagram only carries its own geometry. */
+.d-box { fill: rgba(26, 32, 51, 0.9); stroke: rgba(92, 235, 165, 0.45); stroke-width: 1.5; }
+.d-box-accent { fill: rgba(92, 235, 165, 0.12); stroke: var(--accent-green); stroke-width: 1.5; }
+.d-box-muted { fill: rgba(26, 32, 51, 0.6); stroke: rgba(141, 151, 168, 0.4); stroke-width: 1.5; }
+.d-box-warn { fill: rgba(245, 181, 68, 0.1); stroke: var(--accent-amber); stroke-width: 1.5; }
+.d-box-danger { fill: rgba(255, 107, 107, 0.1); stroke: var(--accent-red); stroke-width: 1.5; }
+.d-label { fill: var(--text-color); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.d-label-sm { fill: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+.d-label-accent { fill: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.d-line { stroke: rgba(92, 235, 165, 0.5); stroke-width: 1.5; fill: none; }
+.d-line-muted { stroke: rgba(141, 151, 168, 0.45); stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; }
+.d-line-danger { stroke: var(--accent-red); stroke-width: 1.5; fill: none; }
+
+/* ---------- terminal ---------- */
+
+.terminal {
+    background: #060910;
+    border: 1px solid rgba(92, 235, 165, 0.22);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.9rem;
+    background: rgba(26, 32, 51, 0.9);
+    border-bottom: 1px solid rgba(92, 235, 165, 0.15);
+}
+
+.terminal-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-amber { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.terminal-title {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-left: 0.4rem;
+}
+
+.terminal-body {
+    padding: 1rem 1.1rem;
+    font-size: 0.78rem;
+    line-height: 1.75;
+    overflow-x: auto;
+}
+
+.terminal-body pre {
+    font-family: 'JetBrains Mono', monospace;
+    white-space: pre;
+    margin: 0;
+}
+
+/* colorama's palette, matched to what the Python actually prints */
+.c-cyan   { color: #56d4dd; }
+.c-green  { color: #5ceba5; }
+.c-yellow { color: #f5b544; }
+.c-red    { color: #ff6b6b; }
+.c-dim    { color: var(--text-muted); }
+.c-white  { color: #e1e7ef; }
+.c-prompt { color: var(--accent-purple); }
+
+/* ---------- key/value tables ---------- */
+
+.kv {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.kv th,
+.kv td {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid rgba(92, 235, 165, 0.12);
+    vertical-align: top;
+}
+
+.kv th {
+    color: var(--accent-green);
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.kv td {
+    color: var(--text-muted);
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+/* ---------- notes ---------- */
+
+.note {
+    border-left: 3px solid var(--accent-amber);
+    background: rgba(245, 181, 68, 0.07);
+    padding: 1rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.note strong {
+    color: var(--accent-amber);
+}
+
+/* ---------- footer ---------- */
+
+.foot {
+    padding: 3rem 0 4rem;
+    border-top: 1px solid rgba(92, 235, 165, 0.12);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+    .wrap { width: min(1080px, 100% - 2rem); }
+    .hero { padding: 2.5rem 0 2rem; }
+    .section { padding: 2.25rem 0; }
+    .diagram { padding: 1rem 0.75rem; }
+    .terminal-body { font-size: 0.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}

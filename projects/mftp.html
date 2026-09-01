@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mftp | MilanDroid</title>
+    <meta name="description" content="A feature-rich command-line FTP client in Python, with recursive operations and a sync that tells you what it did.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://github.com/MilanDroid/mftp" class="btn btn-primary" target="_blank" rel="noopener">Source on GitHub &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">CLI tool &middot; Python &middot; open source</p>
+        <h1>mftp</h1>
+        <p class="lede">
+            A command-line FTP client that says what it is doing. Recursive uploads and deletes,
+            a sync that distinguishes uploading from replacing from skipping, and a password that
+            never has to appear in your shell history.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Python 3.6+</span>
+            <span class="tag">colorama</span>
+            <span class="tag">ftplib</span>
+            <span class="tag">argparse</span>
+            <span class="tag">setuptools</span>
+            <span class="tag">Cross-platform</span>
+        </div>
+        <p class="section-sub">
+            No screenshots on this page &mdash; it is a terminal program, so every block below is
+            the real output, reproduced from the strings in <code>ftp_client.py</code>.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Install</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">zsh</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">$</span> <span class="c-white">pip install mftp_client-1.0.0-py3-none-any.whl</span>
+<span class="c-dim">Successfully installed mftp-client-1.0.0 colorama-0.4.6</span>
+
+<span class="c-dim"># then, from anywhere</span>
+<span class="c-prompt">$</span> <span class="c-white">mftp -H ftp.example.com -u myuser</span></pre>
+            </div>
+        </div>
+        <div class="note">
+            <strong>The password flag is the one you should not use.</strong> Omitting
+            <code>-p</code> makes the client prompt instead, which keeps the password out of your
+            shell history &mdash; and out of the process list. The help text says so, and puts the
+            recommended form first.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Connecting</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; session start</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">$</span> <span class="c-white">mftp -H ftp.example.com -u deploy</span>
+<span class="c-cyan">============================================================</span>
+<span class="c-cyan">FTP Client - Type 'help' for available commands</span>
+<span class="c-cyan">============================================================</span>
+
+<span class="c-white">Password for deploy@ftp.example.com:</span>
+<span class="c-cyan">Connecting to ftp.example.com:21 with username deploy...</span>
+<span class="c-green">&check; Connected successfully!</span>
+<span class="c-yellow">220 ProFTPD Server ready.</span>
+
+<span class="c-prompt">ftp&gt;</span> <span class="c-white">pwd</span>
+<span class="c-white">/home/deploy</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Sync, and the three things it can do</h2>
+        <p class="section-sub">
+            <code>sync</code> replaces what is already there; <code>sync-skip</code> leaves it
+            alone. Each path reports which of the three branches it took, so a deploy log tells you
+            what actually changed.
+        </p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 280" role="img" aria-labelledby="sync-title">
+                <title id="sync-title">Decision tree for sync and sync-skip on each path</title>
+
+                <rect x="16" y="112" width="130" height="48" rx="6" class="d-box-accent"/>
+                <text x="81" y="132" class="d-label-accent" text-anchor="middle">local path</text>
+                <text x="81" y="148" class="d-label-sm" text-anchor="middle">file or folder</text>
+
+                <path d="M150 136 H206" class="d-line" marker-end="url(#mf-a)"/>
+
+                <rect x="210" y="106" width="150" height="60" rx="6" class="d-box"/>
+                <text x="285" y="130" class="d-label" text-anchor="middle">exists remotely?</text>
+                <text x="285" y="148" class="d-label-sm" text-anchor="middle">file_exists()</text>
+
+                <path d="M364 122 H430 V64 H486" class="d-line" marker-end="url(#mf-a)"/>
+                <text x="410" y="56" class="d-label-sm" text-anchor="middle">no</text>
+
+                <rect x="490" y="40" width="180" height="48" rx="6" class="d-box"/>
+                <text x="580" y="70" class="d-label"><tspan class="d-label-accent">&uarr;</tspan> Uploading</text>
+
+                <path d="M364 150 H430 V150 H486" class="d-line" marker-end="url(#mf-a)"/>
+                <text x="412" y="142" class="d-label-sm" text-anchor="middle">yes</text>
+
+                <rect x="490" y="126" width="180" height="48" rx="6" class="d-box-warn"/>
+                <text x="580" y="156" class="d-label">which command?</text>
+
+                <path d="M674 140 H716 V96 H758" class="d-line" marker-end="url(#mf-a)"/>
+                <rect x="762" y="72" width="126" height="48" rx="6" class="d-box"/>
+                <text x="825" y="92" class="d-label-sm" text-anchor="middle">sync</text>
+                <text x="825" y="108" class="d-label" text-anchor="middle">&#8635; Replacing</text>
+
+                <path d="M674 160 H716 V212 H758" class="d-line" marker-end="url(#mf-a)"/>
+                <rect x="762" y="188" width="126" height="48" rx="6" class="d-box-muted"/>
+                <text x="825" y="208" class="d-label-sm" text-anchor="middle">sync-skip</text>
+                <text x="825" y="224" class="d-label" text-anchor="middle">&#8856; Skipped</text>
+
+                <text x="16" y="248" class="d-label-sm">a folder recurses, creating remote directories as it goes</text>
+
+                <defs>
+                    <marker id="mf-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+
+        <h3>sync &mdash; replace what is already there</h3>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; sync</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">ftp&gt;</span> <span class="c-white">sync ./dist</span>
+<span class="c-cyan">Directory exists: dist</span>
+<span class="c-cyan">&#8635; Replacing: ./dist/index.html -&gt; dist/index.html</span>
+<span class="c-green">&check; Synced: ./dist/index.html -&gt; dist/index.html</span>
+<span class="c-cyan">Created remote directory: dist/assets</span>
+<span class="c-cyan">&uarr; Uploading: ./dist/assets/app.css -&gt; dist/assets/app.css</span>
+<span class="c-green">&check; Synced: ./dist/assets/app.css -&gt; dist/assets/app.css</span>
+<span class="c-cyan">&uarr; Uploading: ./dist/assets/app.js -&gt; dist/assets/app.js</span>
+<span class="c-green">&check; Synced: ./dist/assets/app.js -&gt; dist/assets/app.js</span>
+<span class="c-green">&check; Synced folder: ./dist -&gt; dist</span></pre>
+            </div>
+        </div>
+
+        <h3>sync-skip &mdash; leave what is already there</h3>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; sync-skip</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">ftp&gt;</span> <span class="c-white">sync-skip ./dist</span>
+<span class="c-cyan">Directory exists: dist</span>
+<span class="c-yellow">&#8856; Skipped (exists): ./dist/index.html -&gt; dist/index.html</span>
+<span class="c-yellow">&#8856; Skipped (exists): ./dist/assets/app.css -&gt; dist/assets/app.css</span>
+<span class="c-cyan">&uarr; Uploading: ./dist/assets/vendor.js -&gt; dist/assets/vendor.js</span>
+<span class="c-green">&check; Synced: ./dist/assets/vendor.js -&gt; dist/assets/vendor.js</span>
+<span class="c-green">&check; Synced folder: ./dist -&gt; dist</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Removing things, including directories</h2>
+        <p class="section-sub">
+            <code>rm</code> takes as many paths as you give it, notices when one is a directory,
+            and recurses rather than failing.
+        </p>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; rm</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">ftp&gt;</span> <span class="c-white">rm old.log cache.tmp legacy/</span>
+<span class="c-cyan">Removing 3 item(s)...</span>
+<span class="c-green">&check; Removed file: old.log</span>
+<span class="c-green">&check; Removed file: cache.tmp</span>
+<span class="c-yellow">'legacy/' is a directory, removing recursively...</span>
+<span class="c-green">&check; Removed file: legacy/2023/notes.txt</span>
+<span class="c-green">&check; Removed directory: legacy/2023</span>
+<span class="c-green">&check; Removed directory: legacy/</span>
+<span class="c-green">&check; Removed 3/3 item(s)</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>When it goes wrong</h2>
+        <p class="section-sub">
+            Failures are counted, not swallowed. A batch reports how many of its items actually
+            succeeded.
+        </p>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; failure modes</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">ftp&gt;</span> <span class="c-white">upload report.pdf</span>
+<span class="c-red">&cross; Not connected to server</span>
+
+<span class="c-prompt">ftp&gt;</span> <span class="c-white">connect ftp.example.com deploy hunter2</span>
+<span class="c-cyan">Connecting to ftp.example.com:21 with username deploy...</span>
+<span class="c-red">&cross; Connection failed: 530 Login authentication failed</span>
+
+<span class="c-prompt">ftp&gt;</span> <span class="c-white">upload missing.pdf report.pdf</span>
+<span class="c-cyan">Uploading 2 file(s)...</span>
+<span class="c-red">&cross; Local file not found: missing.pdf</span>
+<span class="c-green">&check; Uploaded: report.pdf -&gt; report.pdf</span>
+<span class="c-green">&check; Uploaded 1/2 file(s)</span>
+
+<span class="c-prompt">ftp&gt;</span> <span class="c-white">quit</span>
+<span class="c-green">&check; Disconnected successfully</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The full command set</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">mftp &mdash; help</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">ftp&gt;</span> <span class="c-white">help</span>
+<span class="c-cyan">============================================================
+FTP Client - Available Commands
+============================================================</span>
+
+<span class="c-yellow">Connection:</span>
+  connect &lt;host&gt; &lt;user&gt; &lt;password&gt; [port]  - Connect to FTP server
+  disconnect                                - Disconnect from server
+  quit, exit                                - Exit the program
+
+<span class="c-yellow">Navigation:</span>
+  ls [path]                                 - List directory contents
+  cd &lt;path&gt;                                 - Change directory
+  pwd                                       - Print working directory
+
+<span class="c-yellow">File Operations:</span>
+  rm &lt;file1&gt; [file2] ...                    - Remove one or more files/directories
+  rmdir &lt;dir1&gt; [dir2] ...                   - Remove one or more directories recursively
+  upload &lt;file1&gt; [file2] ...                - Upload one or more files
+  uploaddir &lt;dir1&gt; [dir2] ...               - Upload one or more folders recursively
+  sync &lt;path1&gt; [path2] ...                  - Sync files/folders (upload new, replace existing)
+  sync-skip &lt;path1&gt; [path2] ...             - Sync files/folders (upload new, skip existing)
+  rename &lt;old_name&gt; &lt;new_name&gt;              - Rename file or folder
+
+<span class="c-yellow">Other:</span>
+  help                                      - Show this help message</pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Flags</h2>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>-H, --host</th><td>FTP server hostname or IP address.</td></tr>
+                <tr><th>-u, --user</th><td>FTP username. Host and user are both required to connect on startup.</td></tr>
+                <tr><th>-p, --password</th><td>Not recommended &mdash; will prompt if omitted. Passwords with <code>|</code>, <code>&amp;</code>, <code>;</code> or <code>$</code> need single quotes if you insist on passing them.</td></tr>
+                <tr><th>-P, --port</th><td>FTP port. Defaults to 21.</td></tr>
+            </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>Runs where Python runs.</strong> macOS on Intel and Apple Silicon, every Linux
+            distribution, Windows 10 and 11 &mdash; anything with Python 3.6 or newer. The only
+            dependency is <code>colorama</code>, which is what makes the output above readable on
+            Windows too.
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>mftp &mdash; built by MilanDroid &middot; v1.0.0</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>

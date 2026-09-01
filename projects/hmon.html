@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hmon | MilanDroid</title>
+    <meta name="description" content="A macOS menu bar monitor for temperature, CPU, memory, disk, network and battery.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/profilex25.webp" type="image/webp">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar-inner">
+        <a href="/index.html#projects" class="back-link">&larr; Back to projects</a>
+        <div class="topbar-actions">
+            <a href="https://github.com/MilanDroid/hmon" class="btn btn-primary" target="_blank" rel="noopener">Source on GitHub &nearr;</a>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <section class="hero">
+        <p class="eyebrow">macOS &middot; native</p>
+        <h1>hmon</h1>
+        <p class="lede">
+            A menu bar monitor for Apple Silicon. Temperature, CPU, memory, disk, network and
+            battery &mdash; 35 sensors, sampled every two seconds, in a popover that stays out of
+            the way until you ask for it.
+        </p>
+        <div class="tag-row">
+            <span class="tag">Swift 5.9</span>
+            <span class="tag">SwiftUI</span>
+            <span class="tag">AppKit</span>
+            <span class="tag">IOKit</span>
+            <span class="tag">ServiceManagement</span>
+            <span class="tag">macOS 13+</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Reading sensors Apple does not publish</h2>
+        <p class="section-sub">
+            Thermal data on Apple Silicon is not part of any public API.
+        </p>
+        <div class="prose">
+            <p>
+                Apple Silicon thermal sensors are exposed through the private
+                <code>IOHIDEventSystemClient</code> interface. There is no header for it and no
+                supported entry point, so hmon resolves the symbols at runtime and matches on
+                temperature event services directly.
+            </p>
+            <p>
+                Everything else comes from documented ground: <code>IOKit</code> for battery and
+                disk, host statistics for CPU and memory, and interface counters differenced across
+                samples for network throughput.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How a reading reaches the menu bar</h2>
+
+        <div class="diagram">
+            <svg viewBox="0 0 900 300" role="img" aria-labelledby="hmon-title">
+                <title id="hmon-title">Sensor sources feeding a sampler, a model and the SwiftUI popover</title>
+
+                <rect x="16" y="30" width="184" height="42" rx="6" class="d-box-warn"/>
+                <text x="108" y="50" class="d-label" text-anchor="middle">IOHIDEventSystemClient</text>
+                <text x="108" y="65" class="d-label-sm" text-anchor="middle">private &middot; temperature</text>
+
+                <rect x="16" y="86" width="184" height="42" rx="6" class="d-box"/>
+                <text x="108" y="106" class="d-label" text-anchor="middle">IOKit</text>
+                <text x="108" y="121" class="d-label-sm" text-anchor="middle">battery &middot; disk</text>
+
+                <rect x="16" y="142" width="184" height="42" rx="6" class="d-box"/>
+                <text x="108" y="162" class="d-label" text-anchor="middle">host statistics</text>
+                <text x="108" y="177" class="d-label-sm" text-anchor="middle">CPU &middot; memory</text>
+
+                <rect x="16" y="198" width="184" height="42" rx="6" class="d-box"/>
+                <text x="108" y="218" class="d-label" text-anchor="middle">interface counters</text>
+                <text x="108" y="233" class="d-label-sm" text-anchor="middle">network, differenced</text>
+
+                <path d="M204 51 H264 V128" class="d-line"/>
+                <path d="M204 107 H264" class="d-line"/>
+                <path d="M204 163 H264 V142" class="d-line"/>
+                <path d="M204 219 H264 V142" class="d-line"/>
+                <path d="M264 135 H296" class="d-line" marker-end="url(#hm-a)"/>
+
+                <rect x="300" y="106" width="170" height="60" rx="6" class="d-box-accent"/>
+                <text x="385" y="130" class="d-label-accent" text-anchor="middle">DispatchSourceTimer</text>
+                <text x="385" y="148" class="d-label-sm" text-anchor="middle">every 2.0s &middot; own queue</text>
+
+                <path d="M474 136 H522" class="d-line" marker-end="url(#hm-a)"/>
+
+                <rect x="526" y="106" width="150" height="60" rx="6" class="d-box"/>
+                <text x="601" y="130" class="d-label" text-anchor="middle">StatsModel</text>
+                <text x="601" y="148" class="d-label-sm" text-anchor="middle">rolling 5m series</text>
+
+                <path d="M680 122 H728" class="d-line" marker-end="url(#hm-a)"/>
+                <path d="M680 152 H728" class="d-line" marker-end="url(#hm-a)"/>
+
+                <rect x="732" y="70" width="152" height="52" rx="6" class="d-box-accent"/>
+                <text x="808" y="92" class="d-label-accent" text-anchor="middle">status item</text>
+                <text x="808" y="108" class="d-label-sm" text-anchor="middle">the always-on strip</text>
+
+                <rect x="732" y="142" width="152" height="52" rx="6" class="d-box-accent"/>
+                <text x="808" y="164" class="d-label-accent" text-anchor="middle">PopoverView</text>
+                <text x="808" y="180" class="d-label-sm" text-anchor="middle">SwiftUI + sparklines</text>
+
+                <defs>
+                    <marker id="hm-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        <p class="diagram-caption">
+            Sampling runs on its own queue so a slow sensor read never stutters the UI.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>What each section shows</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Temperature</h3>
+                <p>CPU, GPU and battery in &deg;C, each with its own bar, over a shared 5-minute sparkline.</p>
+            </div>
+            <div class="card">
+                <h3>CPU</h3>
+                <p>Total load with a per-core breakdown behind a disclosure, plus a 5-minute trace.</p>
+            </div>
+            <div class="card">
+                <h3>Memory</h3>
+                <p>Used against total, as a percentage and as a series.</p>
+            </div>
+            <div class="card">
+                <h3>Disk</h3>
+                <p>Used and free, with the percentage the Finder does not put in front of you.</p>
+            </div>
+            <div class="card">
+                <h3>Network</h3>
+                <p>Down and up in KB/s, differenced from interface counters between samples.</p>
+            </div>
+            <div class="card">
+                <h3>Battery</h3>
+                <p>Health as macOS reports it, with the raw numbers behind that figure: cycles, design capacity, voltage, current draw.</p>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top:1.5rem;">
+            <strong>Battery health, shown honestly.</strong> The headline percentage is what macOS
+            reports, and it is labelled as such. Underneath, hmon shows the raw ratio it was derived
+            from &mdash; full charge against design capacity &mdash; because those two numbers
+            frequently disagree, and only one of them is measured.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The interface</h2>
+        <p class="section-sub">
+            Screenshots go here. The popover is a tall portrait, so it gets a portrait frame rather
+            than being stretched into a wide one.
+        </p>
+        <div class="grid">
+            <div class="shot portrait">
+                <div>
+                    <span class="shot-name">The popover</span>
+                    All six sections, expanded.
+                    <span class="shot-path">assets/hmon-popover.webp</span>
+                </div>
+            </div>
+            <div class="shot portrait">
+                <div>
+                    <span class="shot-name">Battery details</span>
+                    The raw values behind the health figure.
+                    <span class="shot-path">assets/hmon-battery.webp</span>
+                </div>
+            </div>
+            <div class="shot portrait">
+                <div>
+                    <span class="shot-name">All sensors</span>
+                    The full list of 35.
+                    <span class="shot-path">assets/hmon-sensors.webp</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>The menu bar strip</h3>
+        <p class="section-sub">
+            Rendered here rather than screenshotted, since it is only ever a line of text.
+        </p>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">menu bar &mdash; always visible</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-yellow">&#127777; 54.6&deg; 46.6&deg;</span>  <span class="c-cyan">28%</span>  <span class="c-green">19.7G</span>  <span class="c-white">248G</span>  <span class="c-dim">BAT</span> <span class="c-green">88%</span>  <span class="c-cyan">&darr;217.0K</span> <span class="c-red">&uarr;25.5K</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Sources</h2>
+        <div class="table-scroll">
+            <table class="kv">
+                <tr><th>Sensors.swift</th><td>Runtime symbol resolution for the private HID event system; temperature services matched and read as floats.</td></tr>
+                <tr><th>SystemStats.swift</th><td>CPU, memory, disk and network counters from documented interfaces.</td></tr>
+                <tr><th>Battery.swift</th><td>Health, cycles, capacity, voltage and current draw, kept separate because the arithmetic behind "health" deserves its own file.</td></tr>
+                <tr><th>StatsModel.swift</th><td>The 2-second timer, the rolling 5-minute series, and the deltas that turn counters into rates.</td></tr>
+                <tr><th>PopoverView.swift</th><td>SwiftUI popover, sections and the sparkline drawing.</td></tr>
+                <tr><th>DesktopWidget.swift</th><td>The desktop-level presentation.</td></tr>
+                <tr><th>LaunchAtLogin.swift</th><td><code>ServiceManagement</code> registration behind the toggle.</td></tr>
+                <tr><th>AppDelegate.swift</th><td>Status item ownership and anchoring the popover to it.</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <div class="foot wrap">
+        <span>hmon &mdash; built by MilanDroid</span>
+        <span><a href="/index.html#projects">All projects</a></span>
+    </div>
+
+</main>
+
+</body>
+</html>
