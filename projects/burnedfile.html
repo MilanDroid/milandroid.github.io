@@ -25,7 +25,7 @@
 <main class="wrap">
 
     <section class="hero">
-        <p class="eyebrow">Full-stack &middot; 2026</p>
+        <p class="eyebrow">File sharing &middot; Google Drive</p>
         <h1>Burnedfile</h1>
         <p class="lede">
             Self-destructing file sharing over the sender's <strong>own</strong> Google Drive.
@@ -39,32 +39,57 @@
             <span class="tag">Fastify</span>
             <span class="tag">MySQL</span>
             <span class="tag">Google Drive API</span>
-            <span class="tag">Argon2</span>
-            <span class="tag">Docker</span>
         </div>
+
+        <figure class="screenshot">
+            <a href="/assets/burnedfile-home.webp" target="_blank" rel="noopener">
+                <img src="/assets/burnedfile-home.webp" width="1440" height="810"
+                     alt="Burnedfile's home page: 'A link with a fuse on it', beside a preview of what the recipient sees before revealing a file">
+            </a>
+            <figcaption>
+                <strong>Home.</strong> The pitch, and beside it exactly what a recipient will see
+                before they open the file.
+            </figcaption>
+        </figure>
+        <p style="margin-top:1.25rem;">
+            <span class="demo-note">Every screenshot here is a fictional demo account: invented files and events, no real data.</span>
+        </p>
     </section>
 
     <section class="section">
         <h2>What it honestly does</h2>
         <p class="section-sub">
-            The product copy says this out loud, and so does this page.
+            The product says this out loud, at the moment it matters, and so does this page.
         </p>
-        <div class="prose">
-            <p>
-                Burnedfile controls <strong>distribution of the link</strong>, not the content. Once
-                bytes reach a viewer, no restriction applies &mdash; screenshots, Save-As and
-                re-uploads are unstoppable. What it actually promises is revocation of
-                <em>future</em> access, plus an audit trail.
-            </p>
-            <p>
-                Country and IP restrictions are <strong>deterrent controls, not security
-                boundaries</strong>. They stop casual and accidental access. They do not stop a VPN.
-            </p>
-            <p>
-                Files are removed within minutes of the final view or expiry, and always within 90
-                minutes. Not "instantly" &mdash; the architecture cannot keep that claim, so it
-                does not make it.
-            </p>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    Burnedfile controls <strong>distribution of the link</strong>, not the content.
+                    Once bytes reach a viewer, no restriction applies &mdash; screenshots, Save-As
+                    and re-uploads are unstoppable. What it actually promises is revocation of
+                    <em>future</em> access, plus an audit trail.
+                </p>
+                <p>
+                    Country and IP restrictions are <strong>deterrent controls, not security
+                    boundaries</strong>. They stop casual and accidental access. They do not stop a
+                    VPN.
+                </p>
+                <p>
+                    Files are removed within minutes of the final view or expiry, and always within
+                    90 minutes. Not "instantly" &mdash; the architecture cannot keep that claim, so it
+                    does not make it.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/burnedfile-created.webp" target="_blank" rel="noopener">
+                    <img src="/assets/burnedfile-created.webp" width="1440" height="810" loading="lazy"
+                         alt="The screen after a link is created: the share address, and a 'Before you send it' note saying the recipient can keep a copy once they open the file">
+                </a>
+                <figcaption>
+                    <strong>Right after a link is created.</strong> Before the sender shares it, the
+                    app says what it can and cannot take back.
+                </figcaption>
+            </figure>
         </div>
         <div class="note" style="margin-top:1.5rem;">
             <strong>Why this section exists.</strong> Most tools in this category overpromise.
@@ -76,67 +101,67 @@
     <section class="section">
         <h2>How a view is decided</h2>
         <p class="section-sub">
-            Every request for a shared file runs an ordered rule pipeline. The order is deliberate:
-            a link that is dead is never denied for <em>who the viewer is</em>, which keeps deny
-            reasons honest in the audit log.
+            Every request for a shared file runs an ordered series of checks. The order is
+            deliberate: a link that is dead is never refused for <em>who the viewer is</em>, which
+            keeps the reasons in the audit trail honest.
         </p>
 
         <div class="diagram">
             <svg viewBox="0 0 900 340" role="img" aria-labelledby="pipeline-title">
-                <title id="pipeline-title">Ordered policy pipeline from request to allow or deny</title>
+                <title id="pipeline-title">The ordered checks between a viewer opening a link and the file being allowed or refused</title>
 
                 <rect x="10" y="140" width="96" height="52" rx="6" class="d-box-accent"/>
                 <text x="58" y="163" class="d-label-accent" text-anchor="middle">viewer</text>
-                <text x="58" y="179" class="d-label-sm" text-anchor="middle">GET /l/:id</text>
+                <text x="58" y="179" class="d-label-sm" text-anchor="middle">opens the link</text>
 
                 <path d="M110 166 H150" class="d-line" marker-end="url(#bf-arrow)"/>
 
                 <rect x="152" y="40" width="600" height="256" rx="8" class="d-box-muted"/>
-                <text x="452" y="64" class="d-label-sm" text-anchor="middle">policy/ &mdash; pure decision core: no I/O, no clock, no network</text>
+                <text x="452" y="64" class="d-label-sm" text-anchor="middle">a pure decision: everything it checks is handed to it, nothing is fetched</text>
 
                 <rect x="172" y="82" width="122" height="42" rx="5" class="d-box"/>
-                <text x="233" y="108" class="d-label" text-anchor="middle">policy_schema</text>
+                <text x="233" y="108" class="d-label" text-anchor="middle">Rules valid</text>
 
                 <rect x="310" y="82" width="122" height="42" rx="5" class="d-box"/>
-                <text x="371" y="108" class="d-label" text-anchor="middle">kill_switch</text>
+                <text x="371" y="108" class="d-label" text-anchor="middle">Service on</text>
 
                 <rect x="448" y="82" width="122" height="42" rx="5" class="d-box"/>
-                <text x="509" y="108" class="d-label" text-anchor="middle">link_state</text>
+                <text x="509" y="108" class="d-label" text-anchor="middle">Link open</text>
 
                 <rect x="586" y="82" width="122" height="42" rx="5" class="d-box"/>
-                <text x="647" y="108" class="d-label" text-anchor="middle">time_window</text>
+                <text x="647" y="108" class="d-label" text-anchor="middle">Time window</text>
 
                 <rect x="172" y="146" width="122" height="42" rx="5" class="d-box"/>
-                <text x="233" y="172" class="d-label" text-anchor="middle">counters</text>
+                <text x="233" y="172" class="d-label" text-anchor="middle">Views left</text>
 
                 <rect x="310" y="146" width="122" height="42" rx="5" class="d-box"/>
-                <text x="371" y="172" class="d-label" text-anchor="middle">byte_cap</text>
+                <text x="371" y="172" class="d-label" text-anchor="middle">Data cap</text>
 
                 <rect x="448" y="146" width="122" height="42" rx="5" class="d-box"/>
-                <text x="509" y="172" class="d-label" text-anchor="middle">content</text>
+                <text x="509" y="172" class="d-label" text-anchor="middle">File present</text>
 
                 <rect x="586" y="146" width="122" height="42" rx="5" class="d-box"/>
-                <text x="647" y="172" class="d-label" text-anchor="middle">owner_conn</text>
+                <text x="647" y="172" class="d-label" text-anchor="middle">Owner's Drive</text>
 
                 <rect x="172" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
-                <text x="233" y="236" class="d-label" text-anchor="middle">network_trust</text>
+                <text x="233" y="236" class="d-label" text-anchor="middle">Trusted IP</text>
 
                 <rect x="310" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
-                <text x="371" y="236" class="d-label" text-anchor="middle">ip / country</text>
+                <text x="371" y="236" class="d-label" text-anchor="middle">IP / country</text>
 
                 <rect x="448" y="210" width="122" height="42" rx="5" class="d-box-warn"/>
-                <text x="509" y="236" class="d-label" text-anchor="middle">os</text>
+                <text x="509" y="236" class="d-label" text-anchor="middle">Device</text>
 
                 <rect x="586" y="210" width="122" height="42" rx="5" class="d-box"/>
-                <text x="647" y="236" class="d-label" text-anchor="middle">password</text>
+                <text x="647" y="236" class="d-label" text-anchor="middle">Password</text>
 
                 <text x="452" y="278" class="d-label-sm" text-anchor="middle">amber = deterrent control, not a security boundary</text>
 
-                <path d="M756 130 H820" class="d-line" marker-end="url(#bf-arrow)"/>
+                <path d="M756 109 H790" class="d-line" marker-end="url(#bf-arrow)"/>
                 <rect x="794" y="86" width="96" height="46" rx="6" class="d-box-accent"/>
                 <text x="842" y="115" class="d-label-accent" text-anchor="middle">ALLOW</text>
 
-                <path d="M756 210 H820" class="d-line-danger" marker-end="url(#bf-arrow-d)"/>
+                <path d="M756 211 H790" class="d-line-danger" marker-end="url(#bf-arrow-d)"/>
                 <rect x="794" y="188" width="96" height="46" rx="6" class="d-box-danger"/>
                 <text x="842" y="209" class="d-label" text-anchor="middle">DENY</text>
                 <text x="842" y="224" class="d-label-sm" text-anchor="middle">+ reason</text>
@@ -152,70 +177,70 @@
             </svg>
         </div>
         <p class="diagram-caption">
-            <code>api/src/policy/</code> has no dependencies on purpose. Time, geography, password
-            verification and every counter are passed <em>in</em>, which makes the whole restriction
+            Simplified. The decision depends on nothing on purpose: time, geography, password
+            checks and every counter are handed <em>in</em>, which makes the whole restriction
             surface testable as a table of plain values.
         </p>
     </section>
 
     <section class="section">
-        <h2>The two state machines</h2>
+        <h2>Two lifecycles</h2>
         <p class="section-sub">
-            A link's lifecycle and the stored file's lifecycle are tracked separately, because a
-            link can die long before the bytes are gone &mdash; and the gap between those two
-            moments is exactly what the sweeper closes.
+            A link and the stored file are tracked separately, because a link can die long before
+            the bytes are gone &mdash; and the gap between those two moments is exactly what the
+            cleanup closes.
         </p>
 
         <div class="diagram">
             <svg viewBox="0 0 900 300" role="img" aria-labelledby="states-title">
-                <title id="states-title">Link state machine above, content state machine below</title>
+                <title id="states-title">The link's lifecycle above, the stored file's lifecycle below</title>
 
-                <text x="20" y="30" class="d-label-accent">LinkState</text>
+                <text x="20" y="30" class="d-label-accent">The link</text>
 
                 <rect x="20" y="46" width="110" height="44" rx="6" class="d-box-muted"/>
-                <text x="75" y="73" class="d-label" text-anchor="middle">DRAFT</text>
+                <text x="75" y="73" class="d-label" text-anchor="middle">Draft</text>
                 <path d="M134 68 H186" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="190" y="46" width="110" height="44" rx="6" class="d-box-accent"/>
-                <text x="245" y="73" class="d-label-accent" text-anchor="middle">ACTIVE</text>
+                <text x="245" y="73" class="d-label-accent" text-anchor="middle">Active</text>
                 <path d="M304 68 H356" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="360" y="46" width="110" height="44" rx="6" class="d-box"/>
-                <text x="415" y="73" class="d-label" text-anchor="middle">SEALED</text>
+                <text x="415" y="73" class="d-label" text-anchor="middle">Sealed</text>
                 <path d="M474 68 H526" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="530" y="46" width="110" height="44" rx="6" class="d-box-danger"/>
-                <text x="585" y="73" class="d-label" text-anchor="middle">CLOSED</text>
+                <text x="585" y="73" class="d-label" text-anchor="middle">Closed</text>
 
                 <path d="M585 94 V116 H700" class="d-line-muted" marker-end="url(#bf-a3)"/>
                 <rect x="704" y="40" width="176" height="118" rx="6" class="d-box-muted"/>
-                <text x="792" y="60" class="d-label-sm" text-anchor="middle">ClosedReason</text>
-                <text x="716" y="78" class="d-label-sm">EXPIRED &middot; REVOKED</text>
-                <text x="716" y="94" class="d-label-sm">VIEWS_EXHAUSTED</text>
-                <text x="716" y="110" class="d-label-sm">BYTES_EXHAUSTED</text>
-                <text x="716" y="126" class="d-label-sm">CONTENT_VANISHED</text>
-                <text x="716" y="142" class="d-label-sm">ABANDONED &middot; ABUSE</text>
+                <text x="792" y="60" class="d-label-sm" text-anchor="middle">why it closed</text>
+                <text x="716" y="78" class="d-label-sm">expired &middot; revoked</text>
+                <text x="716" y="94" class="d-label-sm">views used up</text>
+                <text x="716" y="110" class="d-label-sm">data cap reached</text>
+                <text x="716" y="126" class="d-label-sm">file disappeared</text>
+                <text x="716" y="142" class="d-label-sm">abandoned &middot; abuse</text>
 
-                <text x="20" y="196" class="d-label-accent">ContentState</text>
+                <text x="20" y="196" class="d-label-accent">The file</text>
 
                 <rect x="20" y="212" width="120" height="44" rx="6" class="d-box-muted"/>
-                <text x="80" y="239" class="d-label" text-anchor="middle">NOT_READY</text>
+                <text x="80" y="239" class="d-label" text-anchor="middle">Not ready</text>
                 <path d="M144 234 H186" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="190" y="212" width="120" height="44" rx="6" class="d-box-accent"/>
-                <text x="250" y="239" class="d-label-accent" text-anchor="middle">SERVABLE</text>
+                <text x="250" y="239" class="d-label-accent" text-anchor="middle">Available</text>
                 <path d="M314 234 H356" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="360" y="212" width="120" height="44" rx="6" class="d-box-warn"/>
-                <text x="420" y="239" class="d-label" text-anchor="middle">BURNING</text>
+                <text x="420" y="239" class="d-label" text-anchor="middle">Burning</text>
                 <path d="M484 234 H526" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="530" y="212" width="120" height="44" rx="6" class="d-box-danger"/>
-                <text x="590" y="239" class="d-label" text-anchor="middle">BURNED</text>
+                <text x="590" y="239" class="d-label" text-anchor="middle">Burned</text>
                 <path d="M654 234 H696" class="d-line" marker-end="url(#bf-a2)"/>
 
                 <rect x="700" y="212" width="120" height="44" rx="6" class="d-box-muted"/>
-                <text x="760" y="239" class="d-label" text-anchor="middle">GONE</text>
+                <text x="760" y="239" class="d-label" text-anchor="middle">Gone</text>
 
                 <defs>
                     <marker id="bf-a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
@@ -228,63 +253,128 @@
             </svg>
         </div>
         <p class="diagram-caption">
-            <code>BURNING &rarr; BURNED</code> is the window the 90-minute guarantee covers.
+            Sealed is the moment the last view is spent: no new views, but the download that view
+            already paid for may still finish. Burning to burned is the window the 90-minute promise
+            covers.
         </p>
     </section>
 
     <section class="section">
-        <h2>The interface</h2>
-        <p class="section-sub">Screenshots go here.</p>
-        <div class="grid">
-            <div class="shot">
-                <div>
-                    <span class="shot-name">My links</span>
-                    The owner's dashboard: audit trail, expiry, revoke.
-                    <span class="shot-path">assets/burnedfile-links.webp</span>
-                </div>
+        <h2>A record that outlives the file</h2>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    Every link the sender created stays listed with its state, its views and its
+                    expiry. A live link can be edited, given a new address, or revoked on the spot.
+                </p>
+                <p>
+                    When the file is gone, the record stays: it is the sender's proof the deletion
+                    happened. And when a deletion fails, the list says so instead of pretending.
+                </p>
             </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Link settings</span>
-                    Views, expiry, password, country and IP rules.
-                    <span class="shot-path">assets/burnedfile-settings.webp</span>
-                </div>
+            <figure class="screenshot">
+                <a href="/assets/burnedfile-links.webp" target="_blank" rel="noopener">
+                    <img src="/assets/burnedfile-links.webp" width="1440" height="810" loading="lazy"
+                         alt="The My links dashboard: a live contract link with views, automated opens and expiry, and a payroll file marked deleted by Burnedfile">
+                </a>
+                <figcaption><strong>My links.</strong> One live link, one already burned.</figcaption>
+            </figure>
+        </div>
+        <div class="feature reverse">
+            <div class="prose">
+                <p>
+                    The audit trail shows when the link was created, each counted view, the finished
+                    download, the moment the link closed and the moment the file left the sender's
+                    Drive.
+                </p>
+                <p>
+                    Link scanners and mail-security bots open links before people do. Those opens
+                    are listed apart and never counted as views.
+                </p>
             </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Viewer's page</span>
-                    What the recipient sees, including a denied state.
-                    <span class="shot-path">assets/burnedfile-viewer.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Drive connect</span>
-                    The OAuth handoff for the sender's own Drive.
-                    <span class="shot-path">assets/burnedfile-drive.webp</span>
-                </div>
-            </div>
+            <figure class="screenshot">
+                <a href="/assets/burnedfile-audit.webp" target="_blank" rel="noopener">
+                    <img src="/assets/burnedfile-audit.webp" width="1430" height="810" loading="lazy"
+                         alt="The audit trail of a burned link: created, revealed from Spain on a desktop, download finished, link closed, file deleted from Drive, then a separate list of automated opens">
+                </a>
+                <figcaption><strong>An audit trail,</strong> from creation to deletion.</figcaption>
+            </figure>
         </div>
     </section>
 
     <section class="section">
-        <h2>Layout</h2>
-        <div class="table-scroll">
-            <table class="kv">
-                <tr><th>api/src/policy/</th><td>The pure decision core &mdash; no I/O, no clock, no network. The piece that must be provably correct, so it is the piece with no dependencies.</td></tr>
-                <tr><th>api/src/security/</th><td>Trust boundary, Argon2 password hashing, id generation, CIDR parsing.</td></tr>
-                <tr><th>api/src/links/</th><td>Grants, view accounting, the link state machine, the egress ledger.</td></tr>
-                <tr><th>api/src/storage/</th><td><code>StorageProvider</code> interface plus the Google Drive implementation.</td></tr>
-                <tr><th>api/src/tasks/</th><td>The sweeper and the burn.</td></tr>
-                <tr><th>api/src/web/</th><td>Fastify routes.</td></tr>
-                <tr><th>api/db/migrations/</th><td>Forward-only SQL.</td></tr>
-                <tr><th>web/</th><td>Vue 3 + Vite frontend.</td></tr>
-                <tr><th>infra/</th><td>Docker Compose, Dockerfile, nginx ALB stand-in.</td></tr>
-            </table>
+        <h2>Deterrents, labelled as deterrents</h2>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    The form says it where the sender sets the rules: country and IP restrictions
+                    stop casual and accidental access, and do not stop someone using a VPN.
+                </p>
+                <p>
+                    It also explains why: country is estimated from an IP address, and an IP
+                    allow-list means little behind the shared addresses most mobile networks use.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/burnedfile-deterrents.webp" target="_blank" rel="noopener">
+                    <img src="/assets/burnedfile-deterrents.webp" width="1430" height="810" loading="lazy"
+                         alt="The country and IP section of the send form, headed 'deterrent controls, not security boundaries', with a warning that they do not stop a VPN">
+                </a>
+                <figcaption><strong>The send form.</strong> The limits are written into the heading.</figcaption>
+            </figure>
         </div>
-        <div class="note" style="margin-top:1.5rem;">
-            <strong>No build step on the API.</strong> Node 24 strips TypeScript types at runtime,
-            so what runs in production is the source you read.
+    </section>
+
+    <section class="section">
+        <h2>The narrowest permission Google offers</h2>
+        <div class="feature reverse">
+            <div class="prose">
+                <p>
+                    Burnedfile asks for one permission, the one Google grants per file. It can read
+                    and delete the files it uploaded, and cannot list, open or search anything else
+                    in the sender's Drive.
+                </p>
+                <p>
+                    Revoking the connection in the Google account ends its access immediately.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/burnedfile-connect.webp" target="_blank" rel="noopener">
+                    <img src="/assets/burnedfile-connect.webp" width="1440" height="810" loading="lazy"
+                         alt="The Google Drive page: connected with a single per-file permission, files going to a burnedfile folder, and an explanation that only files Burnedfile creates are visible to it">
+                </a>
+                <figcaption><strong>Google Drive.</strong> Connected, with the one permission it holds.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Decisions worth explaining</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>The sender's own Drive</h3>
+                <p>The file is stored in the sender's Google Drive, private, rather than in storage of Burnedfile's own, and is deleted from there when the link is done.</p>
+            </div>
+            <div class="card">
+                <h3>Two views by default</h3>
+                <p>A security scanner at the recipient's company often opens the link first. The spare view stops that from using up the file.</p>
+            </div>
+            <div class="card">
+                <h3>Honest refusals</h3>
+                <p>A dead link is refused as dead, never for who is asking. The audit trail records the true reason, so the sender can trust what it says.</p>
+            </div>
+            <div class="card">
+                <h3>The last view still downloads</h3>
+                <p>Spending the final view seals the link instead of closing it, so the person who used that view still gets the file they were promised.</p>
+            </div>
+            <div class="card">
+                <h3>A notice that stays true</h3>
+                <p>The recipient is told what will be recorded before opening the file, so that setting is fixed once the link exists. A setting that could change later would make the notice false.</p>
+            </div>
+            <div class="card">
+                <h3>Never their IP address</h3>
+                <p>The sender is never shown a recipient's IP address, at any level of detail, including on export.</p>
+            </div>
         </div>
     </section>
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manyue | MilanDroid</title>
-    <meta name="description" content="Photograph a receipt or say one sentence, and Manyue writes the bookkeeping entry.">
+    <meta name="description" content="A household ledger in more than one currency, kept up to date without the typing: photograph a receipt, say one sentence, or hand it a bank statement.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
@@ -25,180 +25,350 @@
 <main class="wrap">
 
     <section class="hero">
-        <p class="eyebrow">Full-stack &middot; 2026</p>
+        <p class="eyebrow">Personal finance &middot; live at manyue.dev</p>
         <h1>Manyue</h1>
         <p class="lede">
-            See where it went. Without typing it in. Photograph a receipt, or say one sentence.
-            Manyue writes the entry, files it under the right category, and remembers the shop for
-            next time.
+            A ledger for a household that runs in more than one currency, kept up to date without
+            the typing. Photograph a receipt, say one sentence, or hand it a bank statement &mdash;
+            Manyue turns it into entries in the right account, under the right category. Receipts
+            and statements arrive as drafts, and nothing from them is saved until you confirm.
         </p>
         <div class="tag-row">
             <span class="tag">Vue 3</span>
-            <span class="tag">Pinia</span>
             <span class="tag">TypeScript</span>
             <span class="tag">Fastify</span>
-            <span class="tag">Drizzle</span>
             <span class="tag">MySQL</span>
             <span class="tag">Gemini</span>
-            <span class="tag">OCR</span>
+            <span class="tag">PWA</span>
+            <span class="tag">English &amp; Spanish</span>
         </div>
+
+        <figure class="screenshot">
+            <a href="/assets/manyue-home.webp" target="_blank" rel="noopener">
+                <img src="/assets/manyue-home.webp" width="1440" height="810"
+                     alt="Manyue's home screen: dollar and lempira holdings, this month's income, spending and currency exchange, a year-long balance chart, and cash back earned by month">
+            </a>
+            <figcaption>
+                <strong>Home.</strong> What you hold in each currency, this month's flows, a year of
+                balance, and the cash back each card earned by month.
+            </figcaption>
+        </figure>
+        <p style="margin-top:1.25rem;">
+            <span class="demo-note">Every screenshot here is a fictional demo account: invented names and amounts, no real data.</span>
+        </p>
     </section>
 
     <section class="section">
         <h2>The part nobody keeps doing</h2>
-        <div class="prose">
-            <p>
-                Bookkeeping tools mostly fail at the same point: the typing. A shoebox of receipts
-                turns into an evening of data entry, so the ledger goes stale and the numbers stop
-                being worth reading.
-            </p>
-            <p>
-                Manyue removes that step. A photograph or a spoken sentence becomes a draft entry
-                with a payee, a category and a split, and the ledger still balances to the cent.
-                Categories are one level deep on purpose, because two is a filing system nobody
-                keeps up.
-            </p>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    Budgeting apps mostly fail at the same point: the typing. A shoebox of receipts
+                    turns into an evening of data entry, the ledger goes stale, and the numbers stop
+                    being worth reading.
+                </p>
+                <p>
+                    Manyue takes that step away. A photograph or a single sentence becomes an entry
+                    with a payee, a category and, where one shop was really two things, a split
+                    &mdash; and the ledger still balances to the cent.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/manyue-two-ways.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-two-ways.webp" width="1430" height="810" loading="lazy"
+                         alt="Manyue's landing page section 'The part nobody keeps doing', showing the two ways in: photograph the receipt, or just say it">
+                </a>
+                <figcaption><strong>The two ways in,</strong> as Manyue's own landing page puts them.</figcaption>
+            </figure>
         </div>
     </section>
 
     <section class="section">
-        <h2>How a receipt becomes an entry</h2>
+        <h2>Say it once</h2>
+        <div class="feature reverse">
+            <div class="prose">
+                <p>
+                    One sentence becomes a movement in the right account, on the right day, and when
+                    it cannot tell which account paid, it asks instead of guessing. The same box
+                    answers questions from your own ledger &mdash; what went to one payee,
+                    what still has no category &mdash; and can divide a bill between categories, set a
+                    card's limit, or move money between accounts and record what the bank kept.
+                </p>
+                <p>
+                    The whole interface comes in English and in Honduran Spanish.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/manyue-assistant.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-assistant.webp" width="1440" height="810" loading="lazy"
+                         alt="The assistant panel in Spanish: the sentence 'Ayer pagué 650 de cena en Sunset Grill con la Visa' recorded as 650 lempiras on the Visa card, with a link to the entry">
+                </a>
+                <figcaption>
+                    <strong>The assistant, in Spanish.</strong> &ldquo;Yesterday I paid 650 for dinner
+                    at Sunset Grill with the Visa&rdquo;, understood as 650 lempiras on the Visa card.
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Every currency, honestly</h2>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    Lempiras and dollars are counted apart and never added together, so no invented
+                    exchange rate sits inside the totals.
+                </p>
+                <p>
+                    A card billed in two currencies keeps a balance in each, and its single credit
+                    line is worked out in both &mdash; so it can tell you how much is left on the
+                    dollar side. A transfer between currencies carries both amounts, and the fee the
+                    bank took.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/manyue-accounts.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-accounts.webp" width="1440" height="810" loading="lazy"
+                         alt="The accounts list: holdings per currency, and a Visa card with a lempira and a dollar balance, each showing what is available of one shared credit line">
+                </a>
+                <figcaption>
+                    <strong>Accounts.</strong> One Visa with a lempira and a dollar balance, and what
+                    is left of its one credit line in each.
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Statements, compared before anything is saved</h2>
+        <div class="feature reverse">
+            <div class="prose">
+                <p>
+                    Drop in the bank's export &mdash; CSV, Excel or a statement PDF &mdash; and Manyue
+                    lines it up against what is already recorded: what is new, what is already there,
+                    what is probably there with the wrong date, and what is recorded but missing from
+                    the statement. Nothing is imported until you choose.
+                </p>
+                <p>
+                    A spreadsheet is usually read without sending anything to a model at all. A PDF is
+                    read by Gemini in the background, and the page says so before you upload.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/manyue-import.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-import.webp" width="1440" height="810" loading="lazy"
+                         alt="Importing a card statement: a comparison of the statement and the system, with two lines new to import, eleven already recorded, and each matched line naming the record it matched">
+                </a>
+                <figcaption>
+                    <strong>A November card statement:</strong> 2 lines to import, 11 already
+                    recorded, and 2 records the statement does not show.
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Transfers that were typed as two records</h2>
+        <div class="feature">
+            <div class="prose">
+                <p>
+                    Money moved between your own accounts often gets typed as spending on one side and
+                    income on the other, which inflates both.
+                </p>
+                <p>
+                    Manyue finds the likely pairs and turns each into the transfer it was, so it drops
+                    out of income and spending. A record that only looks like a transfer can be marked
+                    as not one, and a paired transfer can be split back apart.
+                </p>
+            </div>
+            <figure class="screenshot">
+                <a href="/assets/manyue-transfers.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-transfers.webp" width="1440" height="810" loading="lazy"
+                         alt="The transfer-pairing page: two hand-typed withdrawals from checking, each offered a likely pair in savings or on the card">
+                </a>
+                <figcaption><strong>Pairing.</strong> Two moves typed by hand, each offered its likely other half.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>The ledger</h2>
         <p class="section-sub">
-            The upload answers immediately and the model call happens behind the response, so a
-            slow extraction never holds the camera open.
+            Under the shortcuts, an ordinary ledger that holds up to scrutiny.
+        </p>
+        <div class="grid">
+            <figure class="screenshot">
+                <a href="/assets/manyue-register.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-register.webp" width="1430" height="810" loading="lazy"
+                         alt="The register filtered to spending, with totals per currency above a list of dated purchases">
+                </a>
+                <figcaption>
+                    <strong>Register.</strong> Totals cover every matching record, not just the rows
+                    loaded, and the selection exports to CSV.
+                </figcaption>
+            </figure>
+            <figure class="screenshot">
+                <a href="/assets/manyue-split.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-split.webp" width="1440" height="810" loading="lazy"
+                         alt="Editing a supermarket bill split between groceries and household cleaning supplies">
+                </a>
+                <figcaption>
+                    <strong>A split.</strong> One supermarket bill, part groceries and part household.
+                    The lines must add up to the total.
+                </figcaption>
+            </figure>
+            <figure class="screenshot">
+                <a href="/assets/manyue-breakdown.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-breakdown.webp" width="1440" height="810" loading="lazy"
+                         alt="A year of spending broken down by category, from rent and groceries down to health">
+                </a>
+                <figcaption>
+                    <strong>Breakdown.</strong> Any period, by category or by payee, one currency at a
+                    time.
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>On a phone</h2>
+        <p class="section-sub">
+            An installable web app with a tab bar and the assistant a tap away. What you record
+            without a connection waits on the device and is sent when you are back.
+        </p>
+        <div class="phone-row">
+            <figure class="screenshot portrait">
+                <a href="/assets/manyue-phone-home.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-phone-home.webp" width="380" height="844" loading="lazy"
+                         alt="Manyue's home screen on a phone: holdings, this month, and accounts stacked as cards above a bottom tab bar">
+                </a>
+                <figcaption><strong>Home</strong> on a phone.</figcaption>
+            </figure>
+            <figure class="screenshot portrait">
+                <a href="/assets/manyue-phone-register.webp" target="_blank" rel="noopener">
+                    <img src="/assets/manyue-phone-register.webp" width="380" height="844" loading="lazy"
+                         alt="The register on a phone: totals per currency above a list of purchases">
+                </a>
+                <figcaption><strong>Register</strong> on a phone.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How an entry gets in</h2>
+        <p class="section-sub">
+            Receipts and statements go through a draft you confirm. A sentence goes through the
+            assistant, which asks rather than guesses. Typing it yourself skips both.
         </p>
 
         <div class="diagram">
-            <svg viewBox="0 0 900 320" role="img" aria-labelledby="flow-title">
-                <title id="flow-title">Receipt upload, background extraction and client polling</title>
+            <svg viewBox="0 0 900 270" role="img" aria-labelledby="entry-title">
+                <title id="entry-title">A receipt photo or a bank statement becomes a draft you confirm; a sentence goes through the assistant, which asks when anything is unclear; a hand-typed entry goes straight to the ledger, which feeds the reports</title>
 
-                <text x="70" y="28" class="d-label-accent" text-anchor="middle">client</text>
-                <text x="330" y="28" class="d-label-accent" text-anchor="middle">Fastify API</text>
-                <text x="600" y="28" class="d-label-accent" text-anchor="middle">extractor</text>
-                <text x="815" y="28" class="d-label-accent" text-anchor="middle">MySQL</text>
+                <rect x="16" y="20" width="180" height="46" rx="6" class="d-box"/>
+                <text x="106" y="39" class="d-label" text-anchor="middle">Photo of a receipt</text>
+                <text x="106" y="55" class="d-label-sm" text-anchor="middle">read in the background</text>
 
-                <path d="M70 40 V300" class="d-line-muted"/>
-                <path d="M330 40 V300" class="d-line-muted"/>
-                <path d="M600 40 V300" class="d-line-muted"/>
-                <path d="M815 40 V300" class="d-line-muted"/>
+                <rect x="16" y="76" width="180" height="46" rx="6" class="d-box"/>
+                <text x="106" y="95" class="d-label" text-anchor="middle">Bank statement</text>
+                <text x="106" y="111" class="d-label-sm" text-anchor="middle">CSV, Excel or PDF</text>
 
-                <path d="M70 66 H326" class="d-line" marker-end="url(#my-a)"/>
-                <text x="198" y="60" class="d-label-sm" text-anchor="middle">POST /v1/receipts &nbsp;(photo)</text>
+                <rect x="16" y="150" width="180" height="46" rx="6" class="d-box"/>
+                <text x="106" y="169" class="d-label" text-anchor="middle">One sentence</text>
+                <text x="106" y="185" class="d-label-sm" text-anchor="middle">typed or spoken</text>
 
-                <path d="M330 100 H74" class="d-line" marker-end="url(#my-a)"/>
-                <text x="202" y="94" class="d-label-accent" text-anchor="middle">202 Accepted</text>
-                <text x="202" y="114" class="d-label-sm" text-anchor="middle">as soon as the photo is stored</text>
+                <rect x="16" y="212" width="180" height="46" rx="6" class="d-box-muted"/>
+                <text x="106" y="231" class="d-label" text-anchor="middle">Typed by hand</text>
+                <text x="106" y="247" class="d-label-sm" text-anchor="middle">the usual form</text>
 
-                <path d="M330 146 H596" class="d-line" marker-end="url(#my-a)"/>
-                <text x="463" y="140" class="d-label-sm" text-anchor="middle">behind the response</text>
+                <path d="M196 43 H220 V71" class="d-line"/>
+                <path d="M196 99 H220 V71" class="d-line"/>
+                <path d="M220 71 H240" class="d-line" marker-end="url(#my-arrow)"/>
 
-                <rect x="520" y="160" width="160" height="40" rx="5" class="d-box-warn"/>
-                <text x="600" y="185" class="d-label" text-anchor="middle">status: extracting</text>
+                <rect x="244" y="44" width="176" height="54" rx="6" class="d-box-warn"/>
+                <text x="332" y="66" class="d-label" text-anchor="middle">A draft</text>
+                <text x="332" y="83" class="d-label-sm" text-anchor="middle">for you to check</text>
 
-                <path d="M600 220 H811" class="d-line" marker-end="url(#my-a)"/>
-                <text x="706" y="214" class="d-label-sm" text-anchor="middle">draft + questions</text>
+                <path d="M420 71 H452" class="d-line" marker-end="url(#my-arrow)"/>
 
-                <path d="M70 254 H326" class="d-line-muted" marker-end="url(#my-a2)"/>
-                <text x="198" y="248" class="d-label-sm" text-anchor="middle">GET /v1/receipts/:id &nbsp;(poll)</text>
+                <rect x="456" y="44" width="140" height="54" rx="6" class="d-box-accent"/>
+                <text x="526" y="66" class="d-label-accent" text-anchor="middle">You confirm</text>
+                <text x="526" y="83" class="d-label-sm" text-anchor="middle">nothing saved before</text>
 
-                <path d="M330 288 H74" class="d-line" marker-end="url(#my-a)"/>
-                <text x="202" y="282" class="d-label-accent" text-anchor="middle">draft, ready to confirm</text>
+                <path d="M596 71 H628" class="d-line" marker-end="url(#my-arrow)"/>
+
+                <path d="M196 173 H240" class="d-line" marker-end="url(#my-arrow)"/>
+
+                <rect x="244" y="146" width="352" height="54" rx="6" class="d-box"/>
+                <text x="420" y="168" class="d-label" text-anchor="middle">The assistant</text>
+                <text x="420" y="185" class="d-label-sm" text-anchor="middle">asks rather than guesses when anything is unclear</text>
+
+                <path d="M596 173 H628" class="d-line" marker-end="url(#my-arrow)"/>
+
+                <rect x="632" y="40" width="150" height="150" rx="6" class="d-box-accent"/>
+                <text x="707" y="100" class="d-label-accent" text-anchor="middle">The ledger</text>
+                <text x="707" y="120" class="d-label-sm" text-anchor="middle">a balance per</text>
+                <text x="707" y="134" class="d-label-sm" text-anchor="middle">currency, never</text>
+                <text x="707" y="148" class="d-label-sm" text-anchor="middle">added together</text>
+
+                <path d="M196 235 H707 V194" class="d-line-muted" marker-end="url(#my-arrow-muted)"/>
+                <text x="420" y="228" class="d-label-sm" text-anchor="middle">already yours</text>
+
+                <path d="M782 115 H794" class="d-line"/>
+                <path d="M794 55 V181" class="d-line"/>
+
+                <rect x="798" y="40" width="92" height="30" rx="5" class="d-box"/>
+                <text x="844" y="59" class="d-label-sm" text-anchor="middle">Breakdown</text>
+                <rect x="798" y="82" width="92" height="30" rx="5" class="d-box"/>
+                <text x="844" y="101" class="d-label-sm" text-anchor="middle">Cash flow</text>
+                <rect x="798" y="124" width="92" height="30" rx="5" class="d-box"/>
+                <text x="844" y="143" class="d-label-sm" text-anchor="middle">Card rewards</text>
+                <rect x="798" y="166" width="92" height="30" rx="5" class="d-box"/>
+                <text x="844" y="185" class="d-label-sm" text-anchor="middle">CSV export</text>
 
                 <defs>
-                    <marker id="my-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <marker id="my-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                         <path d="M0 0 L8 4 L0 8 z" fill="rgba(92,235,165,0.7)"/>
                     </marker>
-                    <marker id="my-a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <marker id="my-arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                         <path d="M0 0 L8 4 L0 8 z" fill="rgba(141,151,168,0.6)"/>
                     </marker>
                 </defs>
             </svg>
         </div>
         <p class="diagram-caption">
-            A retry of a failed receipt is reset to <code>extracting</code> first, so nobody is
-            shown the previous failure as though it were this attempt's.
+            A photo is accepted at once and read behind the response, so a slow reading never holds
+            the camera open.
         </p>
     </section>
 
     <section class="section">
-        <h2>Bring your own key</h2>
-        <p class="section-sub">
-            Users can store their own Gemini API key and pay their own way.
-        </p>
-        <div class="note">
-            <strong>The rule that matters most in it:</strong> a stored key that will not open
-            <em>throws</em> rather than falling back to the server's. Falling through would bill the
-            owner for somebody who believed they were paying their own way &mdash; silently. Keys
-            are written through a write-only API and never read back.
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>The interface</h2>
-        <p class="section-sub">Screenshots go here.</p>
-        <div class="grid">
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Home</span>
-                    Balances per currency, cash flow by month, where it went.
-                    <span class="shot-path">assets/manyue-home.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Scan</span>
-                    Camera capture and the extracted draft with its questions.
-                    <span class="shot-path">assets/manyue-scan.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Register</span>
-                    The full ledger, split across categories, balancing to the cent.
-                    <span class="shot-path">assets/manyue-register.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">AI assistant</span>
-                    One sentence in, a recorded transaction out.
-                    <span class="shot-path">assets/manyue-assistant.webp</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>Built out of</h2>
+        <h2>Decisions worth explaining</h2>
         <div class="grid">
             <div class="card">
-                <h3>apps/web</h3>
-                <p>Vue 3 with Pinia, vue-router and vue-i18n. IndexedDB via <code>idb</code> for local state, Zod for shared contracts.</p>
+                <h3>Receipts and statements start as drafts</h3>
+                <p>A receipt or a statement becomes a draft first. A model can misread a photo; it should never be able to change your balances on its own.</p>
             </div>
             <div class="card">
-                <h3>apps/api</h3>
-                <p>Fastify with helmet, cors, rate-limit and multipart. Drizzle over MySQL, Argon2 for passwords, jose for tokens.</p>
+                <h3>Ask, never guess</h3>
+                <p>When the assistant cannot tell which account paid, it asks. An entry with a guessed field is worse than a question, because it is already done by the time anyone reads it.</p>
             </div>
             <div class="card">
-                <h3>packages/ocr</h3>
-                <p>Receipt extraction, isolated from both the API and the web app so it can be tested on its own.</p>
+                <h3>Your receipts stay in your Drive</h3>
+                <p>Photographs are kept in your own Google Drive and nowhere else. The ledger holds the numbers; the pictures stay yours.</p>
             </div>
             <div class="card">
-                <h3>packages/shared</h3>
-                <p>Zod schemas and uuidv7 ids, imported by every other workspace so the contract has one home.</p>
+                <h3>Your own AI key, never a silent fallback</h3>
+                <p>You can bring your own Gemini key. If it stops working, Manyue stops and tells you, rather than quietly switching to the shared key and billing someone else.</p>
             </div>
-        </div>
-
-        <h3>A slice of the API surface</h3>
-        <div class="table-scroll">
-            <table class="kv">
-                <tr><th>/v1/receipts</th><td>Upload a photograph; answers 202 while extraction runs behind the response.</td></tr>
-                <tr><th>/v1/assistant/interpret</th><td>One sentence in, a structured transaction out.</td></tr>
-                <tr><th>/v1/accounts/:id/reconciliation</th><td>Statement reconciliation against the recorded ledger.</td></tr>
-                <tr><th>/v1/accounts/:id/balances</th><td>Balances per currency, which is why the home screen can add up.</td></tr>
-                <tr><th>/v1/auth/google/drive/callback</th><td>Drive connection, kept separate from sign-in.</td></tr>
-                <tr><th>/v1/categories</th><td>One level deep, by design.</td></tr>
-            </table>
+            <div class="card">
+                <h3>A shared key with a visible limit</h3>
+                <p>Without your own key there is a daily allowance per person. The app shows what is left, and says &ldquo;tomorrow&rdquo; when it runs out instead of failing mid-scan.</p>
+            </div>
+            <div class="card">
+                <h3>Offline, without silent merges</h3>
+                <p>What you record without a connection waits and is sent later. If it clashes with a change made elsewhere, you are shown both and you decide.</p>
+            </div>
         </div>
     </section>
 
