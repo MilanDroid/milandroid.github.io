@@ -40,9 +40,22 @@
             <span class="tag">setuptools</span>
             <span class="tag">Cross-platform</span>
         </div>
-        <p class="section-sub">
-            No screenshots on this page &mdash; it is a terminal program, so every block below is
-            the real output, reproduced from the strings in <code>ftp_client.py</code>.
+
+        <figure class="screenshot">
+            <a href="/assets/mftp-session.webp" target="_blank" rel="noopener">
+                <img src="/assets/mftp-session.webp" width="2160" height="1350"
+                     alt="A terminal running mftp: it connects to ftp.example.com, runs sync on ./dist, which replaces index.html and uploads a new script, then runs sync-skip on ./uploads, which skips an existing logo and uploads a new banner">
+            </a>
+            <figcaption>
+                <strong>A deploy in two commands.</strong> <code>sync</code> replaces what is already
+                on the server and <code>sync-skip</code> leaves it alone. Each file says whether it was
+                uploaded, replaced or skipped.
+            </figcaption>
+        </figure>
+        <p class="section-sub" style="margin-top:1.25rem;">
+            The image is a mock-up: the server and files are invented, but every line is mftp's own
+            output in its own colors. The blocks below are reproduced the same way, from the strings
+            in <code>ftp_client.py</code>.
         </p>
     </section>
 
@@ -56,7 +69,7 @@
                 <span class="terminal-title">zsh</span>
             </div>
             <div class="terminal-body">
-<pre><span class="c-prompt">$</span> <span class="c-white">pip install mftp_client-1.0.0-py3-none-any.whl</span>
+<pre><span class="c-prompt">$</span> <span class="c-white">pip install git+https://github.com/MilanDroid/mftp.git</span>
 <span class="c-dim">Successfully installed mftp-client-1.0.0 colorama-0.4.6</span>
 
 <span class="c-dim"># then, from anywhere</span>
