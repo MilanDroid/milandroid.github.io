@@ -70,29 +70,29 @@
     <section class="section">
         <h2>Coverage</h2>
         <p class="section-sub">
-            The real figures from the pipeline's own report, not rounded for effect.
+            The figures the live site shows, frozen on 19 December 2025. Not rounded for effect.
         </p>
-        <div class="grid">
+        <div class="grid grid-pairs">
             <div class="card">
                 <h3>19,137</h3>
-                <p>actas published by the CNE and pulled down.</p>
+                <p>actas available from the CNE, out of 19,167 polling tables.</p>
             </div>
             <div class="card">
-                <h3>16,895</h3>
-                <p>actas read, validated and counted.</p>
+                <h3>18,854</h3>
+                <p>actas read by the model.</p>
             </div>
             <div class="card">
-                <h3>88.28%</h3>
-                <p>coverage &mdash; and the shortfall is reported, not hidden.</p>
+                <h3>17,918</h3>
+                <p>passed every check and are in the count &mdash; 95.04% of those read.</p>
             </div>
             <div class="card">
-                <h3>2,245</h3>
-                <p>actas left unprocessed, each one listed by id in the report.</p>
+                <h3>936</h3>
+                <p>failed a check and stay out of the count, listed on the site rather than hidden.</p>
             </div>
         </div>
         <p class="section-sub" style="margin-top:1.5rem;">
-            Across 18 departments plus <em>voto en el exterior</em>, counting five parties: PNH,
-            PLH, LIBRE, PINU and DC.
+            Another 313 were still waiting to be read when the site froze. Across 18 departments plus
+            <em>voto en el exterior</em>, counting five parties: PNH, PLH, LIBRE, PINU and DC.
         </p>
     </section>
 
@@ -230,36 +230,50 @@
 
     <section class="section">
         <h2>The site</h2>
-        <p class="section-sub">Screenshots go here.</p>
-        <div class="grid">
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Mi Conteo</span>
-                    The independent count, with the per-department gap for each candidate.
-                    <span class="shot-path">assets/hn2025-mi-conteo.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Conteo CNE</span>
-                    The official numbers, shown beside the independent ones.
-                    <span class="shot-path">assets/hn2025-conteo-cne.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">An&aacute;lisis a CNE</span>
-                    Where the two counts disagree, and by how much.
-                    <span class="shot-path">assets/hn2025-analisis.webp</span>
-                </div>
-            </div>
-            <div class="shot">
-                <div>
-                    <span class="shot-name">Actas</span>
-                    The index of scanned actas, each traceable to its mesa.
-                    <span class="shot-path">assets/hn2025-actas.webp</span>
-                </div>
-            </div>
+        <p class="section-sub">
+            Captured from the live site on a screen 1440 pixels wide. The site is in Spanish.
+        </p>
+        <div class="grid grid-pairs">
+            <figure class="screenshot">
+                <a href="/assets/hn2025-mi-conteo.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hn2025-mi-conteo.webp" width="2160" height="1350" loading="lazy"
+                         alt="Mi Conteo: the two leading candidates with their vote totals, the gap between them in each department, and a row counting actas waiting, read, valid and flagged">
+                </a>
+                <figcaption>
+                    <strong>Mi Conteo.</strong> The independent count: each candidate's total, the gap
+                    in every department, and the tally of actas underneath.
+                </figcaption>
+            </figure>
+            <figure class="screenshot">
+                <a href="/assets/hn2025-conteo-cne.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hn2025-conteo-cne.webp" width="2160" height="1350" loading="lazy"
+                         alt="Conteo CNE: the CNE's official totals for the same two candidates, laid out like Mi Conteo, with the CNE's own acta counts below">
+                </a>
+                <figcaption>
+                    <strong>Conteo CNE.</strong> The official figures in the same layout, so the two
+                    pages can be compared one to one.
+                </figcaption>
+            </figure>
+            <figure class="screenshot">
+                <a href="/assets/hn2025-analisis.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hn2025-analisis.webp" width="2160" height="1350" loading="lazy"
+                         alt="An&aacute;lisis a CNE: a line chart of each leading candidate's CNE vote total at every update from 20 to 23 December, above a chart of the gap between first and second place">
+                </a>
+                <figcaption>
+                    <strong>An&aacute;lisis a CNE.</strong> The CNE count over time: each candidate's
+                    votes at every update, and the gap between first and second place.
+                </figcaption>
+            </figure>
+            <figure class="screenshot">
+                <a href="/assets/hn2025-actas.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hn2025-actas.webp" width="2160" height="1350" loading="lazy"
+                         alt="Actas: filters by acta number, department, municipality, voting centre and availability, a summary of 19,167 PDFs indexed and 19,137 available, and cards for each polling table with an Open PDF button">
+                </a>
+                <figcaption>
+                    <strong>Actas.</strong> All 19,167 polling tables, filterable down to a single
+                    voting centre, each with its PDF one click away.
+                </figcaption>
+            </figure>
         </div>
     </section>
 
@@ -311,7 +325,7 @@
                 <tr><th>app/server/</th><td>A small Express server that reads and writes the acta JSON files on disk.</td></tr>
                 <tr><th>actas_data_cne/</th><td>The CNE's own published figures, kept separate from the extracted ones so the two can be compared rather than merged.</td></tr>
                 <tr><th>actas_corrections/</th><td>Human corrections, stored apart from the raw model output so the original reading is never lost.</td></tr>
-                <tr><th>reports/</th><td><code>validation_report.txt</code>, <code>unprocessed_actas_report.json</code> and the inconsistency lists that produced the coverage figures above.</td></tr>
+                <tr><th>reports/</th><td><code>processed_actas_validation_report.json</code>, which the site reads for the coverage figures above, and the inconsistency lists behind them.</td></tr>
             </table>
         </div>
         <div class="note" style="margin-top:1.5rem;">

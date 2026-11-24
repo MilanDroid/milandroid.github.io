@@ -230,6 +230,10 @@ a {
     gap: 1.25rem;
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
 }
+/* Wide screenshots: two per row, so an even set never leaves one alone on its last row. */
+.grid.grid-pairs {
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+}
 
 .card {
     background: var(--glass-bg);
