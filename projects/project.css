@@ -54,6 +54,12 @@ body::before {
     margin-inline: auto;
 }
 
+/* The footer sits inside main.wrap and carries .wrap itself; without this it is
+   inset a second time and its divider stops short of every section divider. */
+.wrap .wrap {
+    width: 100%;
+}
+
 a {
     color: var(--accent-green);
 }
@@ -225,6 +231,11 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
 }
 
+/* For four items: two per row reads as a square instead of three and an orphan. */
+.grid.grid-pairs {
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+}
+
 .card {
     background: var(--glass-bg);
     border: 1px solid rgba(92, 235, 165, 0.18);
@@ -289,6 +300,106 @@ a {
     aspect-ratio: 9 / 16;
     max-width: 300px;
     margin-inline: auto;
+}
+
+/* ---------- screenshots ---------- */
+
+/* A real screenshot: framed like the cards, captioned, and a link to the
+   full-size image, because a desktop UI shrunk into a column is unreadable. */
+.screenshot {
+    margin: 0;
+}
+
+.screenshot a {
+    display: block;
+    border: 1px solid rgba(92, 235, 165, 0.18);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--navy-bg);
+    cursor: zoom-in;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.screenshot a:hover,
+.screenshot a:focus-visible {
+    border-color: var(--glass-border);
+    transform: translateY(-3px);
+}
+
+.screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.screenshot figcaption {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+}
+
+.screenshot figcaption strong {
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+/* Phone captures keep their own proportions instead of filling a wide column. */
+.screenshot.portrait {
+    max-width: 280px;
+    margin-inline: auto;
+}
+
+.feature {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+.feature + .feature {
+    margin-top: 3rem;
+}
+
+/* Mirrored row: the screenshot moves left and keeps the wide column with it. */
+.feature.reverse {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.feature.reverse > .screenshot {
+    order: -1;
+}
+
+@media (max-width: 860px) {
+    .feature,
+    .feature.reverse {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .feature.reverse > .screenshot {
+        order: 0;
+    }
+}
+
+/* Phone captures side by side, centred as a pair rather than spread across a grid. */
+.phone-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.phone-row .screenshot.portrait {
+    width: min(280px, 100%);
+    margin-inline: 0;
+}
+
+.demo-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px dashed rgba(92, 235, 165, 0.25);
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    display: inline-block;
 }
 
 /* ---------- diagrams ---------- */

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hmon | MilanDroid</title>
-    <meta name="description" content="A macOS menu bar monitor for temperature, CPU, memory, disk, network and battery.">
+    <meta name="description" content="A macOS menu bar monitor for Apple Silicon: temperature, CPU, memory, disk, network and battery.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
@@ -40,6 +40,28 @@
             <span class="tag">ServiceManagement</span>
             <span class="tag">macOS 13+</span>
         </div>
+    </section>
+
+    <section class="section">
+        <h2>Install and run</h2>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-amber"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">zsh</span>
+            </div>
+            <div class="terminal-body">
+<pre><span class="c-prompt">$</span> <span class="c-white">git clone https://github.com/MilanDroid/hmon.git</span>
+<span class="c-prompt">$</span> <span class="c-white">cd hmon &amp;&amp; make install</span>
+<span class="c-dim"># release build, ad-hoc signed .app, copied to ~/Applications and launched</span></pre>
+            </div>
+        </div>
+        <p class="section-sub">
+            Needs macOS 13 or later and the Swift 5.9 toolchain from the Xcode 15 Command Line
+            Tools. There is no dock icon &mdash; look to the right side of the menu bar. Free and
+            MIT licensed.
+        </p>
     </section>
 
     <section class="section">
@@ -164,31 +186,24 @@
     <section class="section">
         <h2>The interface</h2>
         <p class="section-sub">
-            Screenshots go here. The popover is a tall portrait, so it gets a portrait frame rather
-            than being stretched into a wide one.
+            Click the menu bar item for the popover. The switch on each section header decides what
+            the menu bar shows; the popover itself always shows everything.
         </p>
-        <div class="grid">
-            <div class="shot portrait">
-                <div>
-                    <span class="shot-name">The popover</span>
-                    All six sections, expanded.
-                    <span class="shot-path">assets/hmon-popover.webp</span>
-                </div>
-            </div>
-            <div class="shot portrait">
-                <div>
-                    <span class="shot-name">Battery details</span>
-                    The raw values behind the health figure.
-                    <span class="shot-path">assets/hmon-battery.webp</span>
-                </div>
-            </div>
-            <div class="shot portrait">
-                <div>
-                    <span class="shot-name">All sensors</span>
-                    The full list of 35.
-                    <span class="shot-path">assets/hmon-sensors.webp</span>
-                </div>
-            </div>
+        <div class="phone-row">
+            <figure class="screenshot portrait">
+                <a href="/assets/hmon-popover.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hmon-popover.webp" width="602" height="1856" loading="lazy"
+                         alt="The hmon popover open under its menu bar item: CPU and GPU temperature, CPU load, memory, disk, network and battery health">
+                </a>
+                <figcaption><strong>The popover</strong>, open under its menu bar item.</figcaption>
+            </figure>
+            <figure class="screenshot portrait">
+                <a href="/assets/hmon-sensors.webp" target="_blank" rel="noopener">
+                    <img src="/assets/hmon-sensors.webp" width="574" height="738" loading="lazy"
+                         alt="The All sensors list expanded: PMU die, calibration and device probes with their temperatures, each badged C for CPU or G for GPU">
+                </a>
+                <figcaption><strong>All sensors</strong>, each badged C or G by silicon family.</figcaption>
+            </figure>
         </div>
 
         <h3>The menu bar strip</h3>
